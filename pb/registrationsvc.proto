@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package pb;
+
+// registration service definition
+service Registration {
+  // register new user
+  rpc Register(RegisterRequest) returns (RegisterResponse) {}
+}
+
+// register request
+message RegisterRequest {
+  // first name of user
+  string firstName = 1;
+  // last name of user
+  string lastName = 2;
+  // email address of user
+  string email = 3;
+}
+
+// register response
+message RegisterResponse {
+  // unique id of user
+  int32 id = 1;
+  string firstName = 2;
+  string lastName = 3;
+  string email = 4;
+}
