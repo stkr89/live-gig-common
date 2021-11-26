@@ -1,6 +1,8 @@
 syntax = "proto3";
 
-package v1;
+package pb.registrationsvc.v1;
+
+option go_package = "pb/registrationsvc/v1";
 
 // registration service definition
 service Registration {
