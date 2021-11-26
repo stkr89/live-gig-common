@@ -11,4 +11,4 @@
 # See also
 #  https://github.com/grpc/grpc-go/tree/master/examples
 
-protoc registrationsvc.proto --go_out=plugins=grpc:.
+protoc registrationsvc/v1/registrationsvc.proto --go_out=plugins=grpc:.
