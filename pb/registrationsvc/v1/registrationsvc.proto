@@ -18,6 +18,8 @@ message RegisterRequest {
   string lastName = 2;
   // email address of user
   string email = 3;
+  // password of user
+  string password = 4;
 }
 
 // register response
