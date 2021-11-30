@@ -1,4 +1,4 @@
-module github.com/shopr-org/shopr-common
+module github.com/live-gig-org/live-gig-common
 
 go 1.16
 
