@@ -29,4 +29,13 @@ message RegisterResponse {
   string firstName = 2;
   string lastName = 3;
   string email = 4;
+  repeated Error errors = 5;
+}
+
+message Error {
+  // http error code
+  int32 statusCode = 1;
+
+  // error detail
+  string message = 2;
 }
