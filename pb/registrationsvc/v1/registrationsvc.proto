@@ -20,6 +20,8 @@ message RegisterRequest {
   string email = 3;
   // password of user
   string password = 4;
+  // confirm password
+  string confirmPassword = 5;
 }
 
 // register response
