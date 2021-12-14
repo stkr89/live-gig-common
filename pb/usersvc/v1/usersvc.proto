@@ -6,9 +6,6 @@ option go_package = "pb/usersvc/v1";
 
 // user svc definition
 service UserSvc {
-  // find user email
-  rpc Find(FindRequest) returns (FindResponse) {}
-
   // register user
   rpc Register(RegisterRequest) returns (RegisterResponse) {}
 }
@@ -21,19 +18,6 @@ message RegisterRequest {
 
 // register user response
 message RegisterResponse {
-  // user
-  UserType user = 1;
-  repeated ErrorType errors = 2;
-}
-
-// find user request
-message FindRequest {
-  // user
-  UserType user = 1;
-}
-
-// find user response
-message FindResponse {
   // user
   UserType user = 1;
   repeated ErrorType errors = 2;
