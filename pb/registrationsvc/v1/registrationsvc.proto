@@ -31,10 +31,11 @@ message RegisterResponse {
   string firstName = 2;
   string lastName = 3;
   string email = 4;
-  repeated Error errors = 5;
+  repeated ErrorType errors = 5;
 }
 
-message Error {
+// error type
+message ErrorType {
   // http error code
   int32 statusCode = 1;
 
