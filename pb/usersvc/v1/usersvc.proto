@@ -8,15 +8,31 @@ option go_package = "pb/usersvc/v1";
 service UserSvc {
   // find user email
   rpc Find(FindRequest) returns (FindResponse) {}
+
+  // register user
+  rpc Register(RegisterRequest) returns (RegisterResponse) {}
 }
 
-// find user by email request
+// register user request
+message RegisterRequest {
+  // user
+  UserType user = 1;
+}
+
+// register user response
+message RegisterResponse {
+  // user
+  UserType user = 1;
+  repeated ErrorType errors = 2;
+}
+
+// find user request
 message FindRequest {
   // user
   UserType user = 1;
 }
 
-// find user by email response
+// find user response
 message FindResponse {
   // user
   UserType user = 1;
@@ -28,7 +44,8 @@ message UserType {
   string id = 1;
   string firstName = 2;
   string lastName = 3;
-  string email  = 4;
+  string email = 4;
+  string awsUserSub = 5;
 }
 
 // error type

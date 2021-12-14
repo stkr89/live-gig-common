@@ -24,7 +24,97 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
-// find user by email request
+// register user request
+type RegisterRequest struct {
+	// user
+	User                 *UserType `protobuf:"bytes,1,opt,name=user,proto3" json:"user,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
+	XXX_unrecognized     []byte    `json:"-"`
+	XXX_sizecache        int32     `json:"-"`
+}
+
+func (m *RegisterRequest) Reset()         { *m = RegisterRequest{} }
+func (m *RegisterRequest) String() string { return proto.CompactTextString(m) }
+func (*RegisterRequest) ProtoMessage()    {}
+func (*RegisterRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_5686a1f77a855eff, []int{0}
+}
+
+func (m *RegisterRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_RegisterRequest.Unmarshal(m, b)
+}
+func (m *RegisterRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_RegisterRequest.Marshal(b, m, deterministic)
+}
+func (m *RegisterRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_RegisterRequest.Merge(m, src)
+}
+func (m *RegisterRequest) XXX_Size() int {
+	return xxx_messageInfo_RegisterRequest.Size(m)
+}
+func (m *RegisterRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_RegisterRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_RegisterRequest proto.InternalMessageInfo
+
+func (m *RegisterRequest) GetUser() *UserType {
+	if m != nil {
+		return m.User
+	}
+	return nil
+}
+
+// register user response
+type RegisterResponse struct {
+	// user
+	User                 *UserType    `protobuf:"bytes,1,opt,name=user,proto3" json:"user,omitempty"`
+	Errors               []*ErrorType `protobuf:"bytes,2,rep,name=errors,proto3" json:"errors,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}     `json:"-"`
+	XXX_unrecognized     []byte       `json:"-"`
+	XXX_sizecache        int32        `json:"-"`
+}
+
+func (m *RegisterResponse) Reset()         { *m = RegisterResponse{} }
+func (m *RegisterResponse) String() string { return proto.CompactTextString(m) }
+func (*RegisterResponse) ProtoMessage()    {}
+func (*RegisterResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_5686a1f77a855eff, []int{1}
+}
+
+func (m *RegisterResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_RegisterResponse.Unmarshal(m, b)
+}
+func (m *RegisterResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_RegisterResponse.Marshal(b, m, deterministic)
+}
+func (m *RegisterResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_RegisterResponse.Merge(m, src)
+}
+func (m *RegisterResponse) XXX_Size() int {
+	return xxx_messageInfo_RegisterResponse.Size(m)
+}
+func (m *RegisterResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_RegisterResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_RegisterResponse proto.InternalMessageInfo
+
+func (m *RegisterResponse) GetUser() *UserType {
+	if m != nil {
+		return m.User
+	}
+	return nil
+}
+
+func (m *RegisterResponse) GetErrors() []*ErrorType {
+	if m != nil {
+		return m.Errors
+	}
+	return nil
+}
+
+// find user request
 type FindRequest struct {
 	// user
 	User                 *UserType `protobuf:"bytes,1,opt,name=user,proto3" json:"user,omitempty"`
@@ -37,7 +127,7 @@ func (m *FindRequest) Reset()         { *m = FindRequest{} }
 func (m *FindRequest) String() string { return proto.CompactTextString(m) }
 func (*FindRequest) ProtoMessage()    {}
 func (*FindRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_5686a1f77a855eff, []int{0}
+	return fileDescriptor_5686a1f77a855eff, []int{2}
 }
 
 func (m *FindRequest) XXX_Unmarshal(b []byte) error {
@@ -65,7 +155,7 @@ func (m *FindRequest) GetUser() *UserType {
 	return nil
 }
 
-// find user by email response
+// find user response
 type FindResponse struct {
 	// user
 	User                 *UserType    `protobuf:"bytes,1,opt,name=user,proto3" json:"user,omitempty"`
@@ -79,7 +169,7 @@ func (m *FindResponse) Reset()         { *m = FindResponse{} }
 func (m *FindResponse) String() string { return proto.CompactTextString(m) }
 func (*FindResponse) ProtoMessage()    {}
 func (*FindResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_5686a1f77a855eff, []int{1}
+	return fileDescriptor_5686a1f77a855eff, []int{3}
 }
 
 func (m *FindResponse) XXX_Unmarshal(b []byte) error {
@@ -120,6 +210,7 @@ type UserType struct {
 	FirstName            string   `protobuf:"bytes,2,opt,name=firstName,proto3" json:"firstName,omitempty"`
 	LastName             string   `protobuf:"bytes,3,opt,name=lastName,proto3" json:"lastName,omitempty"`
 	Email                string   `protobuf:"bytes,4,opt,name=email,proto3" json:"email,omitempty"`
+	AwsUserSub           string   `protobuf:"bytes,5,opt,name=awsUserSub,proto3" json:"awsUserSub,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -129,7 +220,7 @@ func (m *UserType) Reset()         { *m = UserType{} }
 func (m *UserType) String() string { return proto.CompactTextString(m) }
 func (*UserType) ProtoMessage()    {}
 func (*UserType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_5686a1f77a855eff, []int{2}
+	return fileDescriptor_5686a1f77a855eff, []int{4}
 }
 
 func (m *UserType) XXX_Unmarshal(b []byte) error {
@@ -178,6 +269,13 @@ func (m *UserType) GetEmail() string {
 	return ""
 }
 
+func (m *UserType) GetAwsUserSub() string {
+	if m != nil {
+		return m.AwsUserSub
+	}
+	return ""
+}
+
 // error type
 type ErrorType struct {
 	// http error code
@@ -193,7 +291,7 @@ func (m *ErrorType) Reset()         { *m = ErrorType{} }
 func (m *ErrorType) String() string { return proto.CompactTextString(m) }
 func (*ErrorType) ProtoMessage()    {}
 func (*ErrorType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_5686a1f77a855eff, []int{3}
+	return fileDescriptor_5686a1f77a855eff, []int{5}
 }
 
 func (m *ErrorType) XXX_Unmarshal(b []byte) error {
@@ -229,6 +327,8 @@ func (m *ErrorType) GetMessage() string {
 }
 
 func init() {
+	proto.RegisterType((*RegisterRequest)(nil), "pb.usersvc.v1.RegisterRequest")
+	proto.RegisterType((*RegisterResponse)(nil), "pb.usersvc.v1.RegisterResponse")
 	proto.RegisterType((*FindRequest)(nil), "pb.usersvc.v1.FindRequest")
 	proto.RegisterType((*FindResponse)(nil), "pb.usersvc.v1.FindResponse")
 	proto.RegisterType((*UserType)(nil), "pb.usersvc.v1.UserType")
@@ -238,25 +338,28 @@ func init() {
 func init() { proto.RegisterFile("pb/usersvc/v1/usersvc.proto", fileDescriptor_5686a1f77a855eff) }
 
 var fileDescriptor_5686a1f77a855eff = []byte{
-	// 284 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x91, 0xcf, 0x4f, 0xbb, 0x40,
-	0x10, 0xc5, 0xbf, 0xa5, 0xf4, 0x07, 0xc3, 0xb7, 0x9a, 0x4c, 0x4c, 0xdc, 0x50, 0x63, 0x1a, 0x4e,
-	0x4d, 0x4c, 0xa8, 0xc5, 0x9b, 0x37, 0x35, 0xf5, 0x64, 0x3c, 0xa0, 0x5e, 0xbc, 0x41, 0x19, 0x0d,
-	0xa6, 0x14, 0xdc, 0x59, 0x48, 0xfc, 0xef, 0x0d, 0x4b, 0xb7, 0xb6, 0x8d, 0x17, 0x6f, 0xcc, 0xfb,
-	0xbc, 0x61, 0x66, 0xdf, 0xc0, 0xb8, 0x4c, 0x66, 0x15, 0x93, 0xe4, 0x7a, 0x39, 0xab, 0xe7, 0xe6,
-	0x33, 0x28, 0x65, 0xa1, 0x0a, 0x1c, 0x95, 0x49, 0x60, 0x94, 0x7a, 0xee, 0x5f, 0x83, 0x7b, 0x9f,
-	0xad, 0xd3, 0x88, 0x3e, 0x2b, 0x62, 0x85, 0x17, 0x60, 0x37, 0x50, 0x74, 0x26, 0x9d, 0xa9, 0x1b,
-	0x9e, 0x06, 0x7b, 0xe6, 0xe0, 0x85, 0x49, 0x3e, 0x7f, 0x95, 0x14, 0x69, 0x93, 0x9f, 0xc3, 0xff,
-	0xb6, 0x97, 0xcb, 0x62, 0xcd, 0xf4, 0xa7, 0x66, 0xbc, 0x84, 0x3e, 0x49, 0x59, 0x48, 0x16, 0xd6,
-	0xa4, 0x3b, 0x75, 0x43, 0x71, 0x60, 0x5f, 0x34, 0x50, 0xfb, 0x37, 0x3e, 0xff, 0x03, 0x86, 0xe6,
-	0x1f, 0x78, 0x04, 0x56, 0x96, 0xea, 0x41, 0x4e, 0x64, 0x65, 0x29, 0x9e, 0x81, 0xf3, 0x96, 0x49,
-	0x56, 0x8f, 0x71, 0x4e, 0xc2, 0xd2, 0xf2, 0x8f, 0x80, 0x1e, 0x0c, 0x57, 0xf1, 0x06, 0x76, 0x35,
-	0xdc, 0xd6, 0x78, 0x02, 0x3d, 0xca, 0xe3, 0x6c, 0x25, 0x6c, 0x0d, 0xda, 0xc2, 0x5f, 0x80, 0xb3,
-	0x5d, 0x00, 0xcf, 0x01, 0x58, 0xc5, 0xaa, 0xe2, 0xbb, 0x22, 0x25, 0x3d, 0xb4, 0x17, 0xed, 0x28,
-	0x28, 0x60, 0x90, 0x13, 0x73, 0xfc, 0x6e, 0x46, 0x9b, 0x32, 0x7c, 0x80, 0x41, 0xb3, 0xf2, 0x53,
-	0xbd, 0xc4, 0x1b, 0xb0, 0x9b, 0xb0, 0xd0, 0x3b, 0x78, 0xe7, 0x4e, 0xfa, 0xde, 0xf8, 0x57, 0xd6,
-	0xa6, 0xeb, 0xff, 0xbb, 0x3d, 0x7e, 0x1d, 0xed, 0x5d, 0x36, 0xe9, 0xeb, 0x93, 0x5e, 0x7d, 0x07,
-	0x00, 0x00, 0xff, 0xff, 0x77, 0xc9, 0x47, 0xa3, 0xf1, 0x01, 0x00, 0x00,
+	// 336 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xbc, 0x52, 0x4d, 0x4f, 0x83, 0x50,
+	0x10, 0x14, 0xfa, 0xbd, 0xb5, 0xd6, 0x6c, 0x4c, 0x24, 0xd4, 0xd4, 0x86, 0x53, 0x13, 0x13, 0x6a,
+	0xeb, 0xcd, 0x83, 0x89, 0x9a, 0x7a, 0xd3, 0x03, 0xea, 0xc5, 0x1b, 0x94, 0xb5, 0x21, 0x29, 0x85,
+	0xbe, 0x05, 0x8c, 0x7f, 0xc1, 0xbf, 0xe0, 0x9f, 0x35, 0xbc, 0xf6, 0xf5, 0x83, 0xe8, 0x41, 0x0f,
+	0xde, 0xd8, 0x99, 0xd9, 0x79, 0x93, 0x65, 0xa0, 0x13, 0x7b, 0x83, 0x94, 0x49, 0x70, 0x36, 0x19,
+	0x64, 0x43, 0xf5, 0x69, 0xc7, 0x22, 0x4a, 0x22, 0x6c, 0xc5, 0x9e, 0xad, 0x90, 0x6c, 0x68, 0x5d,
+	0x41, 0xdb, 0xa1, 0x69, 0xc0, 0x09, 0x09, 0x87, 0x16, 0x29, 0x71, 0x82, 0x67, 0x50, 0xce, 0x05,
+	0x86, 0xd6, 0xd3, 0xfa, 0xcd, 0xd1, 0xb1, 0xbd, 0xb3, 0x60, 0x3f, 0x33, 0x89, 0xa7, 0xf7, 0x98,
+	0x1c, 0x29, 0xb2, 0x16, 0x70, 0xb8, 0xd9, 0xe7, 0x38, 0x9a, 0x33, 0xfd, 0xca, 0x00, 0xcf, 0xa1,
+	0x4a, 0x42, 0x44, 0x82, 0x0d, 0xbd, 0x57, 0xea, 0x37, 0x47, 0x46, 0x41, 0x3e, 0xce, 0x49, 0xa9,
+	0x5f, 0xe9, 0xac, 0x4b, 0x68, 0xde, 0x05, 0x73, 0xff, 0x4f, 0x71, 0x43, 0xd8, 0x5f, 0xee, 0xfe,
+	0x4f, 0xd4, 0x0f, 0x0d, 0xea, 0xca, 0x04, 0x0f, 0x40, 0x0f, 0x7c, 0xf9, 0x52, 0xc3, 0xd1, 0x03,
+	0x1f, 0x4f, 0xa0, 0xf1, 0x1a, 0x08, 0x4e, 0x1e, 0xdc, 0x90, 0x0c, 0x5d, 0xc2, 0x1b, 0x00, 0x4d,
+	0xa8, 0xcf, 0xdc, 0x15, 0x59, 0x92, 0xe4, 0x7a, 0xc6, 0x23, 0xa8, 0x50, 0xe8, 0x06, 0x33, 0xa3,
+	0x2c, 0x89, 0xe5, 0x80, 0x5d, 0x00, 0xf7, 0x8d, 0xf3, 0xe7, 0x1e, 0x53, 0xcf, 0xa8, 0x48, 0x6a,
+	0x0b, 0xb1, 0xc6, 0xd0, 0x58, 0x27, 0xcc, 0xc5, 0x9c, 0xb8, 0x49, 0xca, 0xb7, 0x91, 0x4f, 0x32,
+	0x54, 0xc5, 0xd9, 0x42, 0xd0, 0x80, 0x5a, 0x48, 0xcc, 0xee, 0x54, 0x45, 0x53, 0xe3, 0xe8, 0x53,
+	0x83, 0x9a, 0xb4, 0xcc, 0x26, 0x78, 0x0d, 0xe5, 0xfc, 0x9c, 0x68, 0x16, 0x2e, 0xb1, 0xf5, 0x7f,
+	0xcc, 0xce, 0xb7, 0xdc, 0xf2, 0xfe, 0xd6, 0x1e, 0xde, 0x43, 0x5d, 0x15, 0x08, 0xbb, 0x05, 0x69,
+	0xa1, 0x99, 0xe6, 0xe9, 0x8f, 0xbc, 0xb2, 0xbb, 0x69, 0xbf, 0xb4, 0x76, 0xda, 0xef, 0x55, 0x65,
+	0xed, 0x2f, 0xbe, 0x02, 0x00, 0x00, 0xff, 0xff, 0x70, 0xc5, 0xb3, 0xcf, 0x15, 0x03, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -273,6 +376,8 @@ const _ = grpc.SupportPackageIsVersion4
 type UserSvcClient interface {
 	// find user email
 	Find(ctx context.Context, in *FindRequest, opts ...grpc.CallOption) (*FindResponse, error)
+	// register user
+	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error)
 }
 
 type userSvcClient struct {
@@ -292,10 +397,21 @@ func (c *userSvcClient) Find(ctx context.Context, in *FindRequest, opts ...grpc.
 	return out, nil
 }
 
+func (c *userSvcClient) Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error) {
+	out := new(RegisterResponse)
+	err := c.cc.Invoke(ctx, "/pb.usersvc.v1.UserSvc/Register", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserSvcServer is the server API for UserSvc service.
 type UserSvcServer interface {
 	// find user email
 	Find(context.Context, *FindRequest) (*FindResponse, error)
+	// register user
+	Register(context.Context, *RegisterRequest) (*RegisterResponse, error)
 }
 
 // UnimplementedUserSvcServer can be embedded to have forward compatible implementations.
@@ -304,6 +420,9 @@ type UnimplementedUserSvcServer struct {
 
 func (*UnimplementedUserSvcServer) Find(ctx context.Context, req *FindRequest) (*FindResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Find not implemented")
+}
+func (*UnimplementedUserSvcServer) Register(ctx context.Context, req *RegisterRequest) (*RegisterResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Register not implemented")
 }
 
 func RegisterUserSvcServer(s *grpc.Server, srv UserSvcServer) {
@@ -328,6 +447,24 @@ func _UserSvc_Find_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserSvc_Register_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserSvcServer).Register(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.usersvc.v1.UserSvc/Register",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserSvcServer).Register(ctx, req.(*RegisterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _UserSvc_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "pb.usersvc.v1.UserSvc",
 	HandlerType: (*UserSvcServer)(nil),
@@ -335,6 +472,10 @@ var _UserSvc_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Find",
 			Handler:    _UserSvc_Find_Handler,
+		},
+		{
+			MethodName: "Register",
+			Handler:    _UserSvc_Register_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
