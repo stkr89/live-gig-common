@@ -1,4 +1,4 @@
-module github.com/stkr89/live-gig-common
+module github.com/stkr89/livegig-common
 
 go 1.16
 
