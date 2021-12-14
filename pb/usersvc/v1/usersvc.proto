@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package pb.usersvc.v1;
+
+option go_package = "pb/usersvc/v1";
+
+// user svc definition
+service User {
+  // find user email
+  rpc Find(FindRequest) returns (FindResponse) {}
+}
+
+// find user by email request
+message FindRequest {
+  // user
+  UserType user = 1;
+}
+
+// find user by email response
+message FindResponse {
+  // user
+  UserType user = 1;
+  repeated ErrorType errors = 2;
+}
+
+// user type
+message UserType {
+  string id = 1;
+  string firstName = 2;
+  string lastName = 3;
+  string email  = 4;
+}
+
+// error type
+message ErrorType {
+  // http error code
+  int32 statusCode = 1;
+
+  // error detail
+  string message = 2;
+}
+
