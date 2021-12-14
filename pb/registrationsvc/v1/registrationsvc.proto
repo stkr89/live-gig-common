@@ -5,7 +5,7 @@ package pb.registrationsvc.v1;
 option go_package = "pb/registrationsvc/v1";
 
 // registration service definition
-service Registration {
+service RegistrationSvc {
   // register new user
   rpc Register(RegisterRequest) returns (RegisterResponse) {}
 }

@@ -5,7 +5,7 @@ package pb.usersvc.v1;
 option go_package = "pb/usersvc/v1";
 
 // user svc definition
-service User {
+service UserSvc {
   // find user email
   rpc Find(FindRequest) returns (FindResponse) {}
 }
