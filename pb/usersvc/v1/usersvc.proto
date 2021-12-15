@@ -12,24 +12,25 @@ service UserSvc {
 
 // register user request
 message RegisterRequest {
-  // user
-  UserType user = 1;
+  // first name of user
+  string firstName = 1;
+  // last name of user
+  string lastName = 2;
+  // email address of user
+  string email = 3;
+  // aws cognito id of user
+  string awsUserSub = 4;
 }
 
 // register user response
 message RegisterResponse {
-  // user
-  UserType user = 1;
-  repeated ErrorType errors = 2;
-}
-
-// user type
-message UserType {
+  // unique id of user
   string id = 1;
   string firstName = 2;
   string lastName = 3;
   string email = 4;
   string awsUserSub = 5;
+  repeated ErrorType errors = 6;
 }
 
 // error type

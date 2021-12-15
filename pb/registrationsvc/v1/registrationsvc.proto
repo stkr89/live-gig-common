@@ -26,8 +26,8 @@ message RegisterRequest {
 
 // register response
 message RegisterResponse {
-  // unique id of user
-  string id = 1;
+  // aws cognito id of user
+  string awsUserSub = 1;
   string firstName = 2;
   string lastName = 3;
   string email = 4;
