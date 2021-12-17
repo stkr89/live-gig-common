@@ -1,2 +1,2 @@
 generate:
-	protoc pb/registrationsvc/v1/registrationsvc.proto --go_out=plugins=grpc:.
+	protoc pb/usersvc/v1/usersvc.proto --go_out=plugins=grpc:.

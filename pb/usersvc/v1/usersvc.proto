@@ -7,7 +7,15 @@ option go_package = "pb/usersvc/v1";
 // user svc definition
 service UserSvc {
   // register user
-  rpc Register(RegisterRequest) returns (RegisterResponse) {}
+  rpc Register(RegisterRequest) returns (UserResponse) {}
+  // find user by email
+  rpc FindByEmail(FindByEmailRequest) returns (UserResponse) {}
+}
+
+// find user by email request
+message FindByEmailRequest {
+  // email address of user
+  string email = 1;
 }
 
 // register user request
@@ -23,7 +31,7 @@ message RegisterRequest {
 }
 
 // register user response
-message RegisterResponse {
+message UserResponse {
   // unique id of user
   string id = 1;
   string firstName = 2;
