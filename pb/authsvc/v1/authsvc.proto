@@ -1,13 +1,28 @@
 syntax = "proto3";
 
-package pb.registrationsvc.v1;
+package pb.authsvc.v1;
 
-option go_package = "pb/signupsvc/v1";
+option go_package = "pb/authsvc/v1";
 
 // sign up service definition
-service SignUpSvc {
+service AuthSvc {
   // sign up new user
   rpc SignUp(SignUpRequest) returns (SignUpResponse) {}
+  rpc SignIn(SignInRequest) returns (SignInResponse) {}
+}
+
+// sign in response
+message SignInResponse {
+  // access token
+  string accessToken = 1;
+}
+
+// sign in request
+message SignInRequest {
+  // email address of user
+  string email = 1;
+  // password of user
+  string password = 2;
 }
 
 // sign up request
