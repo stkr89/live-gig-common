@@ -2,16 +2,16 @@ syntax = "proto3";
 
 package pb.registrationsvc.v1;
 
-option go_package = "pb/registrationsvc/v1";
+option go_package = "pb/signupsvc/v1";
 
-// registration service definition
-service RegistrationSvc {
-  // register new user
-  rpc Register(RegisterRequest) returns (RegisterResponse) {}
+// sign up service definition
+service SignUpSvc {
+  // sign up new user
+  rpc SignUp(SignUpRequest) returns (SignUpResponse) {}
 }
 
-// register request
-message RegisterRequest {
+// sign up request
+message SignUpRequest {
   // first name of user
   string firstName = 1;
   // last name of user
@@ -24,8 +24,8 @@ message RegisterRequest {
   string confirmPassword = 5;
 }
 
-// register response
-message RegisterResponse {
+// sign up response
+message SignUpResponse {
   // aws cognito id of user
   string awsUserSub = 1;
   string firstName = 2;

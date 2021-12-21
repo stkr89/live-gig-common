@@ -1,6 +1,6 @@
 generate:
-	protoc pb/usersvc/v1/usersvc.proto --go_out=plugins=grpc:.
+	protoc pb/signupsvc/v1/signupsvc.proto --go_out=plugins=grpc:.
 
 mock:
 	mocker --dst pb/usersvc/v1/mock/usersvc_mock.go --pkg mock pb/usersvc/v1/usersvc.pb.go UserSvcClient
-	mocker --dst pb/registrationsvc/v1/mock/registrationsvc_mock.go --pkg mock pb/registrationsvc/v1/registrationsvc.pb.go RegistrationSvcClient
+	mocker --dst pb/signupsvc/v1/mock/signupsvc_mock.go --pkg mock pb/signupsvc/v1/signupsvc.pb.go SignUpSvcClient
