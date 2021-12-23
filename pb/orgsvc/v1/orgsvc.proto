@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package pb.orgsvc.v1;
+
+option go_package = "pb/orgsvc/v1";
+
+// org service definition
+service OrgSvc {
+  // create new org
+  rpc Create(CreateRequest) returns (CreateResponse) {}
+}
+
+// create org response
+message CreateResponse {
+  // unique id of org
+  string id = 1;
+  string name = 2;
+  string adminUserId = 3;
+}
+
+// create org request
+message CreateRequest {
+  // name or org
+  string name = 1;
+  // user id of admin
+  string adminUserId = 2;
+}
