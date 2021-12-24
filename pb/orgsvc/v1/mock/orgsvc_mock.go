@@ -15,7 +15,7 @@ import (
 // MockOrgSvcClient is a mock of OrgSvcClient interface
 type MockOrgSvcClient struct {
 	lockCreate sync.Mutex
-	CreateFunc func(ctx context.Context, in *github_com_stkr89_livegig_common_pb_orgsvc_v1.CreateRequest, opts ...google_golang_org_grpc.CallOption) (*github_com_stkr89_livegig_common_pb_orgsvc_v1.CreateResponse, error)
+	CreateFunc func(ctx context.Context, in *github_com_stkr89_livegig_common_pb_orgsvc_v1.CreateRequest, opts ...google_golang_org_grpc.CallOption) (*github_com_stkr89_livegig_common_pb_orgsvc_v1.OrgResponse, error)
 
 	calls struct {
 		Create []struct {
@@ -27,7 +27,7 @@ type MockOrgSvcClient struct {
 }
 
 // Create mocks base method by wrapping the associated func.
-func (m *MockOrgSvcClient) Create(ctx context.Context, in *github_com_stkr89_livegig_common_pb_orgsvc_v1.CreateRequest, opts ...google_golang_org_grpc.CallOption) (*github_com_stkr89_livegig_common_pb_orgsvc_v1.CreateResponse, error) {
+func (m *MockOrgSvcClient) Create(ctx context.Context, in *github_com_stkr89_livegig_common_pb_orgsvc_v1.CreateRequest, opts ...google_golang_org_grpc.CallOption) (*github_com_stkr89_livegig_common_pb_orgsvc_v1.OrgResponse, error) {
 	m.lockCreate.Lock()
 	defer m.lockCreate.Unlock()
 

@@ -24,8 +24,8 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
-// create org response
-type CreateResponse struct {
+// org response
+type OrgResponse struct {
 	// unique id of org
 	Id                   string   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name                 string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
@@ -35,46 +35,46 @@ type CreateResponse struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *CreateResponse) Reset()         { *m = CreateResponse{} }
-func (m *CreateResponse) String() string { return proto.CompactTextString(m) }
-func (*CreateResponse) ProtoMessage()    {}
-func (*CreateResponse) Descriptor() ([]byte, []int) {
+func (m *OrgResponse) Reset()         { *m = OrgResponse{} }
+func (m *OrgResponse) String() string { return proto.CompactTextString(m) }
+func (*OrgResponse) ProtoMessage()    {}
+func (*OrgResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_0a94a9b62e908a3f, []int{0}
 }
 
-func (m *CreateResponse) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_CreateResponse.Unmarshal(m, b)
+func (m *OrgResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_OrgResponse.Unmarshal(m, b)
 }
-func (m *CreateResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_CreateResponse.Marshal(b, m, deterministic)
+func (m *OrgResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_OrgResponse.Marshal(b, m, deterministic)
 }
-func (m *CreateResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_CreateResponse.Merge(m, src)
+func (m *OrgResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_OrgResponse.Merge(m, src)
 }
-func (m *CreateResponse) XXX_Size() int {
-	return xxx_messageInfo_CreateResponse.Size(m)
+func (m *OrgResponse) XXX_Size() int {
+	return xxx_messageInfo_OrgResponse.Size(m)
 }
-func (m *CreateResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_CreateResponse.DiscardUnknown(m)
+func (m *OrgResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_OrgResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_CreateResponse proto.InternalMessageInfo
+var xxx_messageInfo_OrgResponse proto.InternalMessageInfo
 
-func (m *CreateResponse) GetId() string {
+func (m *OrgResponse) GetId() string {
 	if m != nil {
 		return m.Id
 	}
 	return ""
 }
 
-func (m *CreateResponse) GetName() string {
+func (m *OrgResponse) GetName() string {
 	if m != nil {
 		return m.Name
 	}
 	return ""
 }
 
-func (m *CreateResponse) GetAdminUserId() string {
+func (m *OrgResponse) GetAdminUserId() string {
 	if m != nil {
 		return m.AdminUserId
 	}
@@ -132,26 +132,26 @@ func (m *CreateRequest) GetAdminUserId() string {
 }
 
 func init() {
-	proto.RegisterType((*CreateResponse)(nil), "pb.orgsvc.v1.CreateResponse")
+	proto.RegisterType((*OrgResponse)(nil), "pb.orgsvc.v1.OrgResponse")
 	proto.RegisterType((*CreateRequest)(nil), "pb.orgsvc.v1.CreateRequest")
 }
 
 func init() { proto.RegisterFile("pb/orgsvc/v1/orgsvc.proto", fileDescriptor_0a94a9b62e908a3f) }
 
 var fileDescriptor_0a94a9b62e908a3f = []byte{
-	// 188 bytes of a gzipped FileDescriptorProto
+	// 191 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x92, 0x2c, 0x48, 0xd2, 0xcf,
 	0x2f, 0x4a, 0x2f, 0x2e, 0x4b, 0xd6, 0x2f, 0x33, 0x84, 0xb2, 0xf4, 0x0a, 0x8a, 0xf2, 0x4b, 0xf2,
-	0x85, 0x78, 0x0a, 0x92, 0xf4, 0xa0, 0x02, 0x65, 0x86, 0x4a, 0x61, 0x5c, 0x7c, 0xce, 0x45, 0xa9,
-	0x89, 0x25, 0xa9, 0x41, 0xa9, 0xc5, 0x05, 0xf9, 0x79, 0xc5, 0xa9, 0x42, 0x7c, 0x5c, 0x4c, 0x99,
-	0x29, 0x12, 0x8c, 0x0a, 0x8c, 0x1a, 0x9c, 0x41, 0x4c, 0x99, 0x29, 0x42, 0x42, 0x5c, 0x2c, 0x79,
-	0x89, 0xb9, 0xa9, 0x12, 0x4c, 0x60, 0x11, 0x30, 0x5b, 0x48, 0x81, 0x8b, 0x3b, 0x31, 0x25, 0x37,
-	0x33, 0x2f, 0xb4, 0x38, 0xb5, 0xc8, 0x33, 0x45, 0x82, 0x19, 0x2c, 0x85, 0x2c, 0xa4, 0xe4, 0xca,
-	0xc5, 0x0b, 0x33, 0xb7, 0xb0, 0x34, 0xb5, 0xb8, 0x04, 0x6e, 0x0c, 0x23, 0x6e, 0x63, 0x98, 0x30,
-	0x8c, 0x31, 0xf2, 0xe7, 0x62, 0xf3, 0x2f, 0x4a, 0x0f, 0x2e, 0x4b, 0x16, 0x72, 0xe5, 0x62, 0x83,
-	0x18, 0x28, 0x24, 0xad, 0x87, 0xec, 0x03, 0x3d, 0x14, 0x6b, 0xa4, 0x64, 0xb0, 0x4b, 0x42, 0xfc,
-	0xa6, 0xc4, 0xe0, 0xc4, 0x17, 0xc5, 0x83, 0x1c, 0x34, 0x49, 0x6c, 0xe0, 0x40, 0x31, 0x06, 0x04,
-	0x00, 0x00, 0xff, 0xff, 0x50, 0xa7, 0xe5, 0x6c, 0x31, 0x01, 0x00, 0x00,
+	0x85, 0x78, 0x0a, 0x92, 0xf4, 0xa0, 0x02, 0x65, 0x86, 0x4a, 0xc1, 0x5c, 0xdc, 0xfe, 0x45, 0xe9,
+	0x41, 0xa9, 0xc5, 0x05, 0xf9, 0x79, 0xc5, 0xa9, 0x42, 0x7c, 0x5c, 0x4c, 0x99, 0x29, 0x12, 0x8c,
+	0x0a, 0x8c, 0x1a, 0x9c, 0x41, 0x4c, 0x99, 0x29, 0x42, 0x42, 0x5c, 0x2c, 0x79, 0x89, 0xb9, 0xa9,
+	0x12, 0x4c, 0x60, 0x11, 0x30, 0x5b, 0x48, 0x81, 0x8b, 0x3b, 0x31, 0x25, 0x37, 0x33, 0x2f, 0xb4,
+	0x38, 0xb5, 0xc8, 0x33, 0x45, 0x82, 0x19, 0x2c, 0x85, 0x2c, 0xa4, 0xe4, 0xca, 0xc5, 0xeb, 0x5c,
+	0x94, 0x9a, 0x58, 0x92, 0x1a, 0x94, 0x5a, 0x58, 0x9a, 0x5a, 0x5c, 0x02, 0x37, 0x86, 0x11, 0xb7,
+	0x31, 0x4c, 0x18, 0xc6, 0x18, 0xf9, 0x70, 0xb1, 0xf9, 0x17, 0xa5, 0x07, 0x97, 0x25, 0x0b, 0x39,
+	0x71, 0xb1, 0x41, 0x0c, 0x14, 0x92, 0xd6, 0x43, 0x76, 0xbe, 0x1e, 0x8a, 0x35, 0x52, 0x92, 0xa8,
+	0x92, 0x48, 0x1e, 0x53, 0x62, 0x70, 0xe2, 0x8b, 0xe2, 0x41, 0x0e, 0x94, 0x24, 0x36, 0x70, 0x70,
+	0x18, 0x03, 0x02, 0x00, 0x00, 0xff, 0xff, 0x62, 0x8b, 0x7d, 0xe5, 0x2b, 0x01, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -167,7 +167,7 @@ const _ = grpc.SupportPackageIsVersion4
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type OrgSvcClient interface {
 	// create new org
-	Create(ctx context.Context, in *CreateRequest, opts ...grpc.CallOption) (*CreateResponse, error)
+	Create(ctx context.Context, in *CreateRequest, opts ...grpc.CallOption) (*OrgResponse, error)
 }
 
 type orgSvcClient struct {
@@ -178,8 +178,8 @@ func NewOrgSvcClient(cc *grpc.ClientConn) OrgSvcClient {
 	return &orgSvcClient{cc}
 }
 
-func (c *orgSvcClient) Create(ctx context.Context, in *CreateRequest, opts ...grpc.CallOption) (*CreateResponse, error) {
-	out := new(CreateResponse)
+func (c *orgSvcClient) Create(ctx context.Context, in *CreateRequest, opts ...grpc.CallOption) (*OrgResponse, error) {
+	out := new(OrgResponse)
 	err := c.cc.Invoke(ctx, "/pb.orgsvc.v1.OrgSvc/Create", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -190,14 +190,14 @@ func (c *orgSvcClient) Create(ctx context.Context, in *CreateRequest, opts ...gr
 // OrgSvcServer is the server API for OrgSvc service.
 type OrgSvcServer interface {
 	// create new org
-	Create(context.Context, *CreateRequest) (*CreateResponse, error)
+	Create(context.Context, *CreateRequest) (*OrgResponse, error)
 }
 
 // UnimplementedOrgSvcServer can be embedded to have forward compatible implementations.
 type UnimplementedOrgSvcServer struct {
 }
 
-func (*UnimplementedOrgSvcServer) Create(ctx context.Context, req *CreateRequest) (*CreateResponse, error) {
+func (*UnimplementedOrgSvcServer) Create(ctx context.Context, req *CreateRequest) (*OrgResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
 

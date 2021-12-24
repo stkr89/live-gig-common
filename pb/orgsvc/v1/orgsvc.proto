@@ -7,11 +7,11 @@ option go_package = "pb/orgsvc/v1";
 // org service definition
 service OrgSvc {
   // create new org
-  rpc Create(CreateRequest) returns (CreateResponse) {}
+  rpc Create(CreateRequest) returns (OrgResponse) {}
 }
 
-// create org response
-message CreateResponse {
+// org response
+message OrgResponse {
   // unique id of org
   string id = 1;
   string name = 2;
