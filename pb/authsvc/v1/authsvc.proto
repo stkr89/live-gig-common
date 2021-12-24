@@ -37,6 +37,8 @@ message SignUpRequest {
   string password = 4;
   // confirm password
   string confirmPassword = 5;
+  // name of the org
+  string orgName = 6;
 }
 
 // sign up response
@@ -46,7 +48,8 @@ message SignUpResponse {
   string firstName = 2;
   string lastName = 3;
   string email = 4;
-  repeated ErrorType errors = 5;
+  string orgName = 5;
+  repeated ErrorType errors = 6;
 }
 
 // error type
