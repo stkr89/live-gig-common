@@ -20,6 +20,9 @@ type MockUserSvcClient struct {
 	lockFindByEmail sync.Mutex
 	FindByEmailFunc func(ctx context.Context, in *github_com_stkr89_livegig_common_pb_usersvc_v1.FindByEmailRequest, opts ...google_golang_org_grpc.CallOption) (*github_com_stkr89_livegig_common_pb_usersvc_v1.UserResponse, error)
 
+	lockDelete sync.Mutex
+	DeleteFunc func(ctx context.Context, in *github_com_stkr89_livegig_common_pb_usersvc_v1.DeleteRequest, opts ...google_golang_org_grpc.CallOption) (*github_com_stkr89_livegig_common_pb_usersvc_v1.DeleteResonse, error)
+
 	calls struct {
 		Create []struct {
 			Ctx  context.Context
@@ -29,6 +32,11 @@ type MockUserSvcClient struct {
 		FindByEmail []struct {
 			Ctx  context.Context
 			In   *github_com_stkr89_livegig_common_pb_usersvc_v1.FindByEmailRequest
+			Opts []google_golang_org_grpc.CallOption
+		}
+		Delete []struct {
+			Ctx  context.Context
+			In   *github_com_stkr89_livegig_common_pb_usersvc_v1.DeleteRequest
 			Opts []google_golang_org_grpc.CallOption
 		}
 	}
@@ -122,6 +130,50 @@ func (m *MockUserSvcClient) FindByEmailCalls() []struct {
 	return m.calls.FindByEmail
 }
 
+// Delete mocks base method by wrapping the associated func.
+func (m *MockUserSvcClient) Delete(ctx context.Context, in *github_com_stkr89_livegig_common_pb_usersvc_v1.DeleteRequest, opts ...google_golang_org_grpc.CallOption) (*github_com_stkr89_livegig_common_pb_usersvc_v1.DeleteResonse, error) {
+	m.lockDelete.Lock()
+	defer m.lockDelete.Unlock()
+
+	if m.DeleteFunc == nil {
+		panic("mocker: MockUserSvcClient.DeleteFunc is nil but MockUserSvcClient.Delete was called.")
+	}
+
+	call := struct {
+		Ctx  context.Context
+		In   *github_com_stkr89_livegig_common_pb_usersvc_v1.DeleteRequest
+		Opts []google_golang_org_grpc.CallOption
+	}{
+		Ctx:  ctx,
+		In:   in,
+		Opts: opts,
+	}
+
+	m.calls.Delete = append(m.calls.Delete, call)
+
+	return m.DeleteFunc(ctx, in, opts...)
+}
+
+// DeleteCalled returns true if Delete was called at least once.
+func (m *MockUserSvcClient) DeleteCalled() bool {
+	m.lockDelete.Lock()
+	defer m.lockDelete.Unlock()
+
+	return len(m.calls.Delete) > 0
+}
+
+// DeleteCalls returns the calls made to Delete.
+func (m *MockUserSvcClient) DeleteCalls() []struct {
+	Ctx  context.Context
+	In   *github_com_stkr89_livegig_common_pb_usersvc_v1.DeleteRequest
+	Opts []google_golang_org_grpc.CallOption
+} {
+	m.lockDelete.Lock()
+	defer m.lockDelete.Unlock()
+
+	return m.calls.Delete
+}
+
 // Reset resets the calls made to the mocked methods.
 func (m *MockUserSvcClient) Reset() {
 	m.lockCreate.Lock()
@@ -130,4 +182,7 @@ func (m *MockUserSvcClient) Reset() {
 	m.lockFindByEmail.Lock()
 	m.calls.FindByEmail = nil
 	m.lockFindByEmail.Unlock()
+	m.lockDelete.Lock()
+	m.calls.Delete = nil
+	m.lockDelete.Unlock()
 }

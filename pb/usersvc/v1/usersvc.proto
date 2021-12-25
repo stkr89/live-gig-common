@@ -10,6 +10,19 @@ service UserSvc {
   rpc Create(CreateRequest) returns (UserResponse) {}
   // find user by email
   rpc FindByEmail(FindByEmailRequest) returns (UserResponse) {}
+  // delete user
+  rpc Delete(DeleteRequest) returns (DeleteResonse) {}
+}
+
+// delete user response
+message DeleteResonse {
+  repeated ErrorType errors = 1;
+}
+
+// delete user request
+message DeleteRequest {
+  // id of user
+  string id = 1;
 }
 
 // find user by email request
