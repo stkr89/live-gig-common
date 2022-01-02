@@ -17,10 +17,18 @@ type MockOrgSvcClient struct {
 	lockCreate sync.Mutex
 	CreateFunc func(ctx context.Context, in *github_com_stkr89_livegig_common_pb_orgsvc_v1.CreateRequest, opts ...google_golang_org_grpc.CallOption) (*github_com_stkr89_livegig_common_pb_orgsvc_v1.OrgResponse, error)
 
+	lockDelete sync.Mutex
+	DeleteFunc func(ctx context.Context, in *github_com_stkr89_livegig_common_pb_orgsvc_v1.DeleteRequest, opts ...google_golang_org_grpc.CallOption) (*github_com_stkr89_livegig_common_pb_orgsvc_v1.DeleteResonse, error)
+
 	calls struct {
 		Create []struct {
 			Ctx  context.Context
 			In   *github_com_stkr89_livegig_common_pb_orgsvc_v1.CreateRequest
+			Opts []google_golang_org_grpc.CallOption
+		}
+		Delete []struct {
+			Ctx  context.Context
+			In   *github_com_stkr89_livegig_common_pb_orgsvc_v1.DeleteRequest
 			Opts []google_golang_org_grpc.CallOption
 		}
 	}
@@ -70,9 +78,56 @@ func (m *MockOrgSvcClient) CreateCalls() []struct {
 	return m.calls.Create
 }
 
+// Delete mocks base method by wrapping the associated func.
+func (m *MockOrgSvcClient) Delete(ctx context.Context, in *github_com_stkr89_livegig_common_pb_orgsvc_v1.DeleteRequest, opts ...google_golang_org_grpc.CallOption) (*github_com_stkr89_livegig_common_pb_orgsvc_v1.DeleteResonse, error) {
+	m.lockDelete.Lock()
+	defer m.lockDelete.Unlock()
+
+	if m.DeleteFunc == nil {
+		panic("mocker: MockOrgSvcClient.DeleteFunc is nil but MockOrgSvcClient.Delete was called.")
+	}
+
+	call := struct {
+		Ctx  context.Context
+		In   *github_com_stkr89_livegig_common_pb_orgsvc_v1.DeleteRequest
+		Opts []google_golang_org_grpc.CallOption
+	}{
+		Ctx:  ctx,
+		In:   in,
+		Opts: opts,
+	}
+
+	m.calls.Delete = append(m.calls.Delete, call)
+
+	return m.DeleteFunc(ctx, in, opts...)
+}
+
+// DeleteCalled returns true if Delete was called at least once.
+func (m *MockOrgSvcClient) DeleteCalled() bool {
+	m.lockDelete.Lock()
+	defer m.lockDelete.Unlock()
+
+	return len(m.calls.Delete) > 0
+}
+
+// DeleteCalls returns the calls made to Delete.
+func (m *MockOrgSvcClient) DeleteCalls() []struct {
+	Ctx  context.Context
+	In   *github_com_stkr89_livegig_common_pb_orgsvc_v1.DeleteRequest
+	Opts []google_golang_org_grpc.CallOption
+} {
+	m.lockDelete.Lock()
+	defer m.lockDelete.Unlock()
+
+	return m.calls.Delete
+}
+
 // Reset resets the calls made to the mocked methods.
 func (m *MockOrgSvcClient) Reset() {
 	m.lockCreate.Lock()
 	m.calls.Create = nil
 	m.lockCreate.Unlock()
+	m.lockDelete.Lock()
+	m.calls.Delete = nil
+	m.lockDelete.Unlock()
 }
