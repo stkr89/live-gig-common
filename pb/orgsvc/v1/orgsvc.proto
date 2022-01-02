@@ -8,6 +8,19 @@ option go_package = "pb/orgsvc/v1";
 service OrgSvc {
   // create new org
   rpc Create(CreateRequest) returns (OrgResponse) {}
+  // delete org
+  rpc Delete(DeleteRequest) returns (DeleteResonse) {}
+}
+
+// delete user response
+message DeleteResonse {
+  repeated ErrorType errors = 1;
+}
+
+// delete user request
+message DeleteRequest {
+  // id of user
+  string id = 1;
 }
 
 // org response
@@ -24,4 +37,13 @@ message CreateRequest {
   string name = 1;
   // user id of admin
   string adminUserId = 2;
+}
+
+// error type
+message ErrorType {
+  // http error code
+  int32 statusCode = 1;
+
+  // error detail
+  string message = 2;
 }
