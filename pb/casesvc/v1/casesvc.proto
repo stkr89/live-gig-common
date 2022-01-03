@@ -17,9 +17,10 @@ message CaseResponse {
   string title = 2;
   string descritption = 3;
   string orgId = 4;
+  string createdBy = 5;
   // reference id of case
-  string referenceId = 5;
-  repeated ErrorType errors = 6;
+  string referenceId = 6;
+  repeated ErrorType errors = 7;
 }
 
 // create case request
