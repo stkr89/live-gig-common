@@ -30,6 +30,8 @@ message CreateRequest {
   string descritption = 2;
   // org id of case
   string orgId = 3;
+  // id of user creating this case
+  string createdBy = 4;
 }
 
 // error type
