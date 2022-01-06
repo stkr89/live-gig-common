@@ -1,37 +1,37 @@
 syntax = "proto3";
 
-package pb.casesvc.v1;
+package pb.ticketsvc.v1;
 
-option go_package = "pb/casesvc/v1";
+option go_package = "pb/ticketsvc/v1";
 
-// case service definition
-service CaseSvc {
-  // create new case
-  rpc Create(CreateRequest) returns (CaseResponse) {}
+// ticket service definition
+service TicketSvc {
+  // create new ticket
+  rpc Create(CreateRequest) returns (TicketResponse) {}
 }
 
-// case response
-message CaseResponse {
-  // unique id of case
+// ticket response
+message TicketResponse {
+  // unique id of ticket
   string id = 1;
   string title = 2;
   string description = 3;
   string orgId = 4;
   string createdBy = 5;
-  // reference id of case
+  // reference id of ticket
   string referenceId = 6;
   repeated ErrorType errors = 7;
 }
 
-// create case request
+// create ticket request
 message CreateRequest {
-  // title of case
+  // title of ticket
   string title = 1;
-  // description of case
+  // description of ticket
   string description = 2;
-  // org id of case
+  // org id of ticket
   string orgId = 3;
-  // id of user creating this case
+  // id of user creating this ticket
   string createdBy = 4;
 }
 
