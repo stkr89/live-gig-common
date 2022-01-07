@@ -1,4 +1,7 @@
 generate:
+	protoc pb/usersvc/v1/usersvc.proto --go_out=plugins=grpc:.
+	protoc pb/authsvc/v1/authsvc.proto --go_out=plugins=grpc:.
+	protoc pb/orgsvc/v1/orgsvc.proto --go_out=plugins=grpc:.
 	protoc pb/ticketsvc/v1/ticketsvc.proto --go_out=plugins=grpc:.
 
 mock:

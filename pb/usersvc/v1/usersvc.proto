@@ -12,6 +12,22 @@ service UserSvc {
   rpc FindByEmail(FindByEmailRequest) returns (UserResponse) {}
   // delete user
   rpc Delete(DeleteRequest) returns (DeleteResonse) {}
+  // update user
+  rpc Update(UpdateRequest) returns (UserResponse) {}
+}
+
+// update user request
+message UpdateRequest {
+  // unique id of user
+  string id = 1;
+  // first name of user
+  string firstName = 2;
+  // last name of user
+  string lastName = 3;
+  // email address of user
+  string email = 4;
+  // aws cognito id of user
+  string awsUserSub = 5;
 }
 
 // delete user response
@@ -39,8 +55,6 @@ message CreateRequest {
   string lastName = 2;
   // email address of user
   string email = 3;
-  // aws cognito id of user
-  string awsUserSub = 4;
 }
 
 // register user response

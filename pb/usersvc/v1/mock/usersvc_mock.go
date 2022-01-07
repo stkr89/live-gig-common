@@ -23,6 +23,9 @@ type MockUserSvcClient struct {
 	lockDelete sync.Mutex
 	DeleteFunc func(ctx context.Context, in *github_com_stkr89_livegig_common_pb_usersvc_v1.DeleteRequest, opts ...google_golang_org_grpc.CallOption) (*github_com_stkr89_livegig_common_pb_usersvc_v1.DeleteResonse, error)
 
+	lockUpdate sync.Mutex
+	UpdateFunc func(ctx context.Context, in *github_com_stkr89_livegig_common_pb_usersvc_v1.UpdateRequest, opts ...google_golang_org_grpc.CallOption) (*github_com_stkr89_livegig_common_pb_usersvc_v1.UserResponse, error)
+
 	calls struct {
 		Create []struct {
 			Ctx  context.Context
@@ -37,6 +40,11 @@ type MockUserSvcClient struct {
 		Delete []struct {
 			Ctx  context.Context
 			In   *github_com_stkr89_livegig_common_pb_usersvc_v1.DeleteRequest
+			Opts []google_golang_org_grpc.CallOption
+		}
+		Update []struct {
+			Ctx  context.Context
+			In   *github_com_stkr89_livegig_common_pb_usersvc_v1.UpdateRequest
 			Opts []google_golang_org_grpc.CallOption
 		}
 	}
@@ -174,6 +182,50 @@ func (m *MockUserSvcClient) DeleteCalls() []struct {
 	return m.calls.Delete
 }
 
+// Update mocks base method by wrapping the associated func.
+func (m *MockUserSvcClient) Update(ctx context.Context, in *github_com_stkr89_livegig_common_pb_usersvc_v1.UpdateRequest, opts ...google_golang_org_grpc.CallOption) (*github_com_stkr89_livegig_common_pb_usersvc_v1.UserResponse, error) {
+	m.lockUpdate.Lock()
+	defer m.lockUpdate.Unlock()
+
+	if m.UpdateFunc == nil {
+		panic("mocker: MockUserSvcClient.UpdateFunc is nil but MockUserSvcClient.Update was called.")
+	}
+
+	call := struct {
+		Ctx  context.Context
+		In   *github_com_stkr89_livegig_common_pb_usersvc_v1.UpdateRequest
+		Opts []google_golang_org_grpc.CallOption
+	}{
+		Ctx:  ctx,
+		In:   in,
+		Opts: opts,
+	}
+
+	m.calls.Update = append(m.calls.Update, call)
+
+	return m.UpdateFunc(ctx, in, opts...)
+}
+
+// UpdateCalled returns true if Update was called at least once.
+func (m *MockUserSvcClient) UpdateCalled() bool {
+	m.lockUpdate.Lock()
+	defer m.lockUpdate.Unlock()
+
+	return len(m.calls.Update) > 0
+}
+
+// UpdateCalls returns the calls made to Update.
+func (m *MockUserSvcClient) UpdateCalls() []struct {
+	Ctx  context.Context
+	In   *github_com_stkr89_livegig_common_pb_usersvc_v1.UpdateRequest
+	Opts []google_golang_org_grpc.CallOption
+} {
+	m.lockUpdate.Lock()
+	defer m.lockUpdate.Unlock()
+
+	return m.calls.Update
+}
+
 // Reset resets the calls made to the mocked methods.
 func (m *MockUserSvcClient) Reset() {
 	m.lockCreate.Lock()
@@ -185,4 +237,7 @@ func (m *MockUserSvcClient) Reset() {
 	m.lockDelete.Lock()
 	m.calls.Delete = nil
 	m.lockDelete.Unlock()
+	m.lockUpdate.Lock()
+	m.calls.Update = nil
+	m.lockUpdate.Unlock()
 }
