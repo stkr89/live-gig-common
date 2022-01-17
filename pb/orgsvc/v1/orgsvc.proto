@@ -10,6 +10,14 @@ service OrgSvc {
   rpc Create(CreateRequest) returns (OrgResponse) {}
   // delete org
   rpc Delete(DeleteRequest) returns (DeleteResonse) {}
+  // get user org
+  rpc GetUserOrg(GetUserOrgRequest) returns (OrgResponse) {}
+}
+
+// get user org request
+message GetUserOrgRequest {
+  // id of user
+  string id = 1;
 }
 
 // delete user response
