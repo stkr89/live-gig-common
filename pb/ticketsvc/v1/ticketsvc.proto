@@ -8,6 +8,22 @@ option go_package = "pb/ticketsvc/v1";
 service TicketSvc {
   // create new ticket
   rpc Create(CreateRequest) returns (TicketResponse) {}
+  // list tickets
+  rpc List(ListRequest) returns (ListResponse) {}
+}
+
+// list response
+message ListResponse {
+  // list of tickets
+  repeated TicketResponse tickets = 1;
+}
+
+// list request
+message ListRequest {
+  // org id
+  string orgId = 1;
+  // user id
+  string userId = 2;
 }
 
 // ticket response

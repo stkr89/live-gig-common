@@ -17,10 +17,18 @@ type MockTicketSvcClient struct {
 	lockCreate sync.Mutex
 	CreateFunc func(ctx context.Context, in *github_com_stkr89_livegig_common_pb_ticketsvc_v1.CreateRequest, opts ...google_golang_org_grpc.CallOption) (*github_com_stkr89_livegig_common_pb_ticketsvc_v1.TicketResponse, error)
 
+	lockList sync.Mutex
+	ListFunc func(ctx context.Context, in *github_com_stkr89_livegig_common_pb_ticketsvc_v1.ListRequest, opts ...google_golang_org_grpc.CallOption) (*github_com_stkr89_livegig_common_pb_ticketsvc_v1.ListResponse, error)
+
 	calls struct {
 		Create []struct {
 			Ctx  context.Context
 			In   *github_com_stkr89_livegig_common_pb_ticketsvc_v1.CreateRequest
+			Opts []google_golang_org_grpc.CallOption
+		}
+		List []struct {
+			Ctx  context.Context
+			In   *github_com_stkr89_livegig_common_pb_ticketsvc_v1.ListRequest
 			Opts []google_golang_org_grpc.CallOption
 		}
 	}
@@ -70,9 +78,56 @@ func (m *MockTicketSvcClient) CreateCalls() []struct {
 	return m.calls.Create
 }
 
+// List mocks base method by wrapping the associated func.
+func (m *MockTicketSvcClient) List(ctx context.Context, in *github_com_stkr89_livegig_common_pb_ticketsvc_v1.ListRequest, opts ...google_golang_org_grpc.CallOption) (*github_com_stkr89_livegig_common_pb_ticketsvc_v1.ListResponse, error) {
+	m.lockList.Lock()
+	defer m.lockList.Unlock()
+
+	if m.ListFunc == nil {
+		panic("mocker: MockTicketSvcClient.ListFunc is nil but MockTicketSvcClient.List was called.")
+	}
+
+	call := struct {
+		Ctx  context.Context
+		In   *github_com_stkr89_livegig_common_pb_ticketsvc_v1.ListRequest
+		Opts []google_golang_org_grpc.CallOption
+	}{
+		Ctx:  ctx,
+		In:   in,
+		Opts: opts,
+	}
+
+	m.calls.List = append(m.calls.List, call)
+
+	return m.ListFunc(ctx, in, opts...)
+}
+
+// ListCalled returns true if List was called at least once.
+func (m *MockTicketSvcClient) ListCalled() bool {
+	m.lockList.Lock()
+	defer m.lockList.Unlock()
+
+	return len(m.calls.List) > 0
+}
+
+// ListCalls returns the calls made to List.
+func (m *MockTicketSvcClient) ListCalls() []struct {
+	Ctx  context.Context
+	In   *github_com_stkr89_livegig_common_pb_ticketsvc_v1.ListRequest
+	Opts []google_golang_org_grpc.CallOption
+} {
+	m.lockList.Lock()
+	defer m.lockList.Unlock()
+
+	return m.calls.List
+}
+
 // Reset resets the calls made to the mocked methods.
 func (m *MockTicketSvcClient) Reset() {
 	m.lockCreate.Lock()
 	m.calls.Create = nil
 	m.lockCreate.Unlock()
+	m.lockList.Lock()
+	m.calls.List = nil
+	m.lockList.Unlock()
 }
