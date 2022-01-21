@@ -22,8 +22,8 @@ message ListResponse {
 message ListRequest {
   // org id
   string orgId = 1;
-  // user id
-  string userId = 2;
+  // created by
+  string createdBy = 2;
 }
 
 // ticket response
