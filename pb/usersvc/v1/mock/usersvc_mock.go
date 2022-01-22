@@ -17,8 +17,8 @@ type MockUserSvcClient struct {
 	lockCreate sync.Mutex
 	CreateFunc func(ctx context.Context, in *github_com_stkr89_livegig_common_pb_usersvc_v1.CreateRequest, opts ...google_golang_org_grpc.CallOption) (*github_com_stkr89_livegig_common_pb_usersvc_v1.UserResponse, error)
 
-	lockFindByEmail sync.Mutex
-	FindByEmailFunc func(ctx context.Context, in *github_com_stkr89_livegig_common_pb_usersvc_v1.FindByEmailRequest, opts ...google_golang_org_grpc.CallOption) (*github_com_stkr89_livegig_common_pb_usersvc_v1.UserResponse, error)
+	lockList sync.Mutex
+	ListFunc func(ctx context.Context, in *github_com_stkr89_livegig_common_pb_usersvc_v1.ListRequest, opts ...google_golang_org_grpc.CallOption) (*github_com_stkr89_livegig_common_pb_usersvc_v1.ListResponse, error)
 
 	lockDelete sync.Mutex
 	DeleteFunc func(ctx context.Context, in *github_com_stkr89_livegig_common_pb_usersvc_v1.DeleteRequest, opts ...google_golang_org_grpc.CallOption) (*github_com_stkr89_livegig_common_pb_usersvc_v1.DeleteResonse, error)
@@ -32,9 +32,9 @@ type MockUserSvcClient struct {
 			In   *github_com_stkr89_livegig_common_pb_usersvc_v1.CreateRequest
 			Opts []google_golang_org_grpc.CallOption
 		}
-		FindByEmail []struct {
+		List []struct {
 			Ctx  context.Context
-			In   *github_com_stkr89_livegig_common_pb_usersvc_v1.FindByEmailRequest
+			In   *github_com_stkr89_livegig_common_pb_usersvc_v1.ListRequest
 			Opts []google_golang_org_grpc.CallOption
 		}
 		Delete []struct {
@@ -94,18 +94,18 @@ func (m *MockUserSvcClient) CreateCalls() []struct {
 	return m.calls.Create
 }
 
-// FindByEmail mocks base method by wrapping the associated func.
-func (m *MockUserSvcClient) FindByEmail(ctx context.Context, in *github_com_stkr89_livegig_common_pb_usersvc_v1.FindByEmailRequest, opts ...google_golang_org_grpc.CallOption) (*github_com_stkr89_livegig_common_pb_usersvc_v1.UserResponse, error) {
-	m.lockFindByEmail.Lock()
-	defer m.lockFindByEmail.Unlock()
+// List mocks base method by wrapping the associated func.
+func (m *MockUserSvcClient) List(ctx context.Context, in *github_com_stkr89_livegig_common_pb_usersvc_v1.ListRequest, opts ...google_golang_org_grpc.CallOption) (*github_com_stkr89_livegig_common_pb_usersvc_v1.ListResponse, error) {
+	m.lockList.Lock()
+	defer m.lockList.Unlock()
 
-	if m.FindByEmailFunc == nil {
-		panic("mocker: MockUserSvcClient.FindByEmailFunc is nil but MockUserSvcClient.FindByEmail was called.")
+	if m.ListFunc == nil {
+		panic("mocker: MockUserSvcClient.ListFunc is nil but MockUserSvcClient.List was called.")
 	}
 
 	call := struct {
 		Ctx  context.Context
-		In   *github_com_stkr89_livegig_common_pb_usersvc_v1.FindByEmailRequest
+		In   *github_com_stkr89_livegig_common_pb_usersvc_v1.ListRequest
 		Opts []google_golang_org_grpc.CallOption
 	}{
 		Ctx:  ctx,
@@ -113,29 +113,29 @@ func (m *MockUserSvcClient) FindByEmail(ctx context.Context, in *github_com_stkr
 		Opts: opts,
 	}
 
-	m.calls.FindByEmail = append(m.calls.FindByEmail, call)
+	m.calls.List = append(m.calls.List, call)
 
-	return m.FindByEmailFunc(ctx, in, opts...)
+	return m.ListFunc(ctx, in, opts...)
 }
 
-// FindByEmailCalled returns true if FindByEmail was called at least once.
-func (m *MockUserSvcClient) FindByEmailCalled() bool {
-	m.lockFindByEmail.Lock()
-	defer m.lockFindByEmail.Unlock()
+// ListCalled returns true if List was called at least once.
+func (m *MockUserSvcClient) ListCalled() bool {
+	m.lockList.Lock()
+	defer m.lockList.Unlock()
 
-	return len(m.calls.FindByEmail) > 0
+	return len(m.calls.List) > 0
 }
 
-// FindByEmailCalls returns the calls made to FindByEmail.
-func (m *MockUserSvcClient) FindByEmailCalls() []struct {
+// ListCalls returns the calls made to List.
+func (m *MockUserSvcClient) ListCalls() []struct {
 	Ctx  context.Context
-	In   *github_com_stkr89_livegig_common_pb_usersvc_v1.FindByEmailRequest
+	In   *github_com_stkr89_livegig_common_pb_usersvc_v1.ListRequest
 	Opts []google_golang_org_grpc.CallOption
 } {
-	m.lockFindByEmail.Lock()
-	defer m.lockFindByEmail.Unlock()
+	m.lockList.Lock()
+	defer m.lockList.Unlock()
 
-	return m.calls.FindByEmail
+	return m.calls.List
 }
 
 // Delete mocks base method by wrapping the associated func.
@@ -231,9 +231,9 @@ func (m *MockUserSvcClient) Reset() {
 	m.lockCreate.Lock()
 	m.calls.Create = nil
 	m.lockCreate.Unlock()
-	m.lockFindByEmail.Lock()
-	m.calls.FindByEmail = nil
-	m.lockFindByEmail.Unlock()
+	m.lockList.Lock()
+	m.calls.List = nil
+	m.lockList.Unlock()
 	m.lockDelete.Lock()
 	m.calls.Delete = nil
 	m.lockDelete.Unlock()

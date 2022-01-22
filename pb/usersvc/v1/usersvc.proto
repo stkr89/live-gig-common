@@ -8,8 +8,8 @@ option go_package = "pb/usersvc/v1";
 service UserSvc {
   // register user
   rpc Create(CreateRequest) returns (UserResponse) {}
-  // find user by email
-  rpc FindByEmail(FindByEmailRequest) returns (UserResponse) {}
+  // list user
+  rpc List(ListRequest) returns (ListResponse) {}
   // delete user
   rpc Delete(DeleteRequest) returns (DeleteResonse) {}
   // update user
@@ -41,8 +41,13 @@ message DeleteRequest {
   string id = 1;
 }
 
-// find user by email request
-message FindByEmailRequest {
+// list response
+message ListResponse {
+  repeated UserResponse data = 1;
+}
+
+// list request
+message ListRequest {
   // email address of user
   string email = 1;
 }
