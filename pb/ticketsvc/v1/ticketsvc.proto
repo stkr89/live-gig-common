@@ -15,7 +15,7 @@ service TicketSvc {
 // list response
 message ListResponse {
   // list of tickets
-  repeated TicketResponse tickets = 1;
+  repeated TicketResponse data = 1;
 }
 
 // list request
