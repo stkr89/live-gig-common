@@ -11,11 +11,16 @@ service OrgSvc {
   // delete org
   rpc Delete(DeleteRequest) returns (DeleteResonse) {}
   // get user org
-  rpc GetUserOrg(GetUserOrgRequest) returns (OrgResponse) {}
+  rpc List(ListRequest) returns (ListResponse) {}
 }
 
-// get user org request
-message GetUserOrgRequest {
+// list response
+message ListResponse {
+  repeated OrgResponse data = 1;
+}
+
+// list request
+message ListRequest {
   // id of user
   string id = 1;
 }

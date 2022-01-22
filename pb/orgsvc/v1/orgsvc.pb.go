@@ -24,8 +24,48 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
-// get user org request
-type GetUserOrgRequest struct {
+// list response
+type ListResponse struct {
+	Data                 []*OrgResponse `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
+	XXX_unrecognized     []byte         `json:"-"`
+	XXX_sizecache        int32          `json:"-"`
+}
+
+func (m *ListResponse) Reset()         { *m = ListResponse{} }
+func (m *ListResponse) String() string { return proto.CompactTextString(m) }
+func (*ListResponse) ProtoMessage()    {}
+func (*ListResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_0a94a9b62e908a3f, []int{0}
+}
+
+func (m *ListResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ListResponse.Unmarshal(m, b)
+}
+func (m *ListResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ListResponse.Marshal(b, m, deterministic)
+}
+func (m *ListResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListResponse.Merge(m, src)
+}
+func (m *ListResponse) XXX_Size() int {
+	return xxx_messageInfo_ListResponse.Size(m)
+}
+func (m *ListResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListResponse proto.InternalMessageInfo
+
+func (m *ListResponse) GetData() []*OrgResponse {
+	if m != nil {
+		return m.Data
+	}
+	return nil
+}
+
+// list request
+type ListRequest struct {
 	// id of user
 	Id                   string   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
@@ -33,32 +73,32 @@ type GetUserOrgRequest struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *GetUserOrgRequest) Reset()         { *m = GetUserOrgRequest{} }
-func (m *GetUserOrgRequest) String() string { return proto.CompactTextString(m) }
-func (*GetUserOrgRequest) ProtoMessage()    {}
-func (*GetUserOrgRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_0a94a9b62e908a3f, []int{0}
+func (m *ListRequest) Reset()         { *m = ListRequest{} }
+func (m *ListRequest) String() string { return proto.CompactTextString(m) }
+func (*ListRequest) ProtoMessage()    {}
+func (*ListRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_0a94a9b62e908a3f, []int{1}
 }
 
-func (m *GetUserOrgRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_GetUserOrgRequest.Unmarshal(m, b)
+func (m *ListRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ListRequest.Unmarshal(m, b)
 }
-func (m *GetUserOrgRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_GetUserOrgRequest.Marshal(b, m, deterministic)
+func (m *ListRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ListRequest.Marshal(b, m, deterministic)
 }
-func (m *GetUserOrgRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_GetUserOrgRequest.Merge(m, src)
+func (m *ListRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListRequest.Merge(m, src)
 }
-func (m *GetUserOrgRequest) XXX_Size() int {
-	return xxx_messageInfo_GetUserOrgRequest.Size(m)
+func (m *ListRequest) XXX_Size() int {
+	return xxx_messageInfo_ListRequest.Size(m)
 }
-func (m *GetUserOrgRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_GetUserOrgRequest.DiscardUnknown(m)
+func (m *ListRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_GetUserOrgRequest proto.InternalMessageInfo
+var xxx_messageInfo_ListRequest proto.InternalMessageInfo
 
-func (m *GetUserOrgRequest) GetId() string {
+func (m *ListRequest) GetId() string {
 	if m != nil {
 		return m.Id
 	}
@@ -77,7 +117,7 @@ func (m *DeleteResonse) Reset()         { *m = DeleteResonse{} }
 func (m *DeleteResonse) String() string { return proto.CompactTextString(m) }
 func (*DeleteResonse) ProtoMessage()    {}
 func (*DeleteResonse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_0a94a9b62e908a3f, []int{1}
+	return fileDescriptor_0a94a9b62e908a3f, []int{2}
 }
 
 func (m *DeleteResonse) XXX_Unmarshal(b []byte) error {
@@ -118,7 +158,7 @@ func (m *DeleteRequest) Reset()         { *m = DeleteRequest{} }
 func (m *DeleteRequest) String() string { return proto.CompactTextString(m) }
 func (*DeleteRequest) ProtoMessage()    {}
 func (*DeleteRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_0a94a9b62e908a3f, []int{2}
+	return fileDescriptor_0a94a9b62e908a3f, []int{3}
 }
 
 func (m *DeleteRequest) XXX_Unmarshal(b []byte) error {
@@ -161,7 +201,7 @@ func (m *OrgResponse) Reset()         { *m = OrgResponse{} }
 func (m *OrgResponse) String() string { return proto.CompactTextString(m) }
 func (*OrgResponse) ProtoMessage()    {}
 func (*OrgResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_0a94a9b62e908a3f, []int{3}
+	return fileDescriptor_0a94a9b62e908a3f, []int{4}
 }
 
 func (m *OrgResponse) XXX_Unmarshal(b []byte) error {
@@ -218,7 +258,7 @@ func (m *CreateRequest) Reset()         { *m = CreateRequest{} }
 func (m *CreateRequest) String() string { return proto.CompactTextString(m) }
 func (*CreateRequest) ProtoMessage()    {}
 func (*CreateRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_0a94a9b62e908a3f, []int{4}
+	return fileDescriptor_0a94a9b62e908a3f, []int{5}
 }
 
 func (m *CreateRequest) XXX_Unmarshal(b []byte) error {
@@ -268,7 +308,7 @@ func (m *ErrorType) Reset()         { *m = ErrorType{} }
 func (m *ErrorType) String() string { return proto.CompactTextString(m) }
 func (*ErrorType) ProtoMessage()    {}
 func (*ErrorType) Descriptor() ([]byte, []int) {
-	return fileDescriptor_0a94a9b62e908a3f, []int{5}
+	return fileDescriptor_0a94a9b62e908a3f, []int{6}
 }
 
 func (m *ErrorType) XXX_Unmarshal(b []byte) error {
@@ -304,7 +344,8 @@ func (m *ErrorType) GetMessage() string {
 }
 
 func init() {
-	proto.RegisterType((*GetUserOrgRequest)(nil), "pb.orgsvc.v1.GetUserOrgRequest")
+	proto.RegisterType((*ListResponse)(nil), "pb.orgsvc.v1.ListResponse")
+	proto.RegisterType((*ListRequest)(nil), "pb.orgsvc.v1.ListRequest")
 	proto.RegisterType((*DeleteResonse)(nil), "pb.orgsvc.v1.DeleteResonse")
 	proto.RegisterType((*DeleteRequest)(nil), "pb.orgsvc.v1.DeleteRequest")
 	proto.RegisterType((*OrgResponse)(nil), "pb.orgsvc.v1.OrgResponse")
@@ -315,27 +356,28 @@ func init() {
 func init() { proto.RegisterFile("pb/orgsvc/v1/orgsvc.proto", fileDescriptor_0a94a9b62e908a3f) }
 
 var fileDescriptor_0a94a9b62e908a3f = []byte{
-	// 314 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x7c, 0x92, 0xcd, 0x4e, 0xfa, 0x40,
-	0x14, 0xc5, 0xff, 0x2d, 0x7f, 0x6b, 0xb8, 0x7c, 0x24, 0xde, 0x8d, 0x05, 0x13, 0x21, 0x75, 0xc3,
-	0xaa, 0x04, 0x7c, 0x01, 0xc3, 0x47, 0x8c, 0x6e, 0x48, 0x8a, 0x6e, 0xdc, 0x15, 0x7a, 0xd3, 0x90,
-	0xd8, 0x4e, 0x9d, 0x3b, 0x34, 0xf1, 0x65, 0x7d, 0x16, 0xc3, 0xb4, 0xb5, 0x2d, 0x82, 0xbb, 0xe9,
-	0x39, 0x93, 0xdf, 0x3d, 0x3d, 0x73, 0xa1, 0x97, 0x6c, 0xc6, 0x42, 0x86, 0x9c, 0x6e, 0xc7, 0xe9,
-	0x24, 0x3f, 0xb9, 0x89, 0x14, 0x4a, 0x60, 0x3b, 0xd9, 0xb8, 0xb9, 0x90, 0x4e, 0x9c, 0x3b, 0xb8,
-	0x7a, 0x24, 0xf5, 0xca, 0x24, 0x57, 0x32, 0xf4, 0xe8, 0x63, 0x4f, 0xac, 0xb0, 0x0b, 0xe6, 0x2e,
-	0xb0, 0x8d, 0xa1, 0x31, 0x6a, 0x7a, 0xe6, 0x2e, 0x70, 0x1e, 0xa0, 0xb3, 0xa0, 0x77, 0x52, 0xe4,
-	0x11, 0x8b, 0x98, 0x09, 0xc7, 0x60, 0x91, 0x94, 0x42, 0xb2, 0x6d, 0x0c, 0x1b, 0xa3, 0xd6, 0xf4,
-	0xda, 0xad, 0x42, 0xdd, 0xe5, 0xc1, 0x7b, 0xf9, 0x4c, 0xc8, 0xcb, 0xaf, 0x39, 0x83, 0x92, 0x70,
-	0x7a, 0xc4, 0x1a, 0x5a, 0x3a, 0x00, 0x27, 0x7a, 0xc0, 0x91, 0x8d, 0x08, 0xff, 0x63, 0x3f, 0x22,
-	0xdb, 0xd4, 0x8a, 0x3e, 0xe3, 0x10, 0x5a, 0x7e, 0x10, 0xed, 0xe2, 0x43, 0xf8, 0xa7, 0xc0, 0x6e,
-	0x68, 0xab, 0x2a, 0x39, 0x4b, 0xe8, 0xcc, 0x25, 0xf9, 0xe5, 0xd4, 0x02, 0x63, 0x9c, 0xc7, 0x98,
-	0xa7, 0x30, 0xcd, 0x9f, 0x3f, 0xc2, 0x5b, 0x00, 0x56, 0xbe, 0xda, 0xf3, 0x5c, 0x04, 0x19, 0xe8,
-	0xc2, 0xab, 0x28, 0x68, 0xc3, 0x65, 0x44, 0xcc, 0x7e, 0x58, 0x84, 0x2d, 0x3e, 0xa7, 0x5f, 0x06,
-	0x58, 0x2b, 0x19, 0xae, 0xd3, 0x2d, 0xce, 0xc0, 0xca, 0x82, 0xe1, 0x4d, 0xbd, 0xb9, 0x5a, 0xdc,
-	0x7e, 0xaf, 0x6e, 0x56, 0x0a, 0x72, 0xfe, 0xe1, 0x02, 0xac, 0xac, 0xd2, 0x63, 0x46, 0xad, 0xe8,
-	0xfe, 0x19, 0x93, 0x73, 0xca, 0x33, 0x40, 0xf9, 0xfe, 0x38, 0xa8, 0x5f, 0xfe, 0xb5, 0x19, 0x7f,
-	0x26, 0x9a, 0x75, 0xdf, 0xda, 0xd5, 0xb5, 0xdb, 0x58, 0x7a, 0xe1, 0xee, 0xbf, 0x03, 0x00, 0x00,
-	0xff, 0xff, 0x04, 0xb1, 0x98, 0x3c, 0x8d, 0x02, 0x00, 0x00,
+	// 330 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x74, 0x92, 0x4f, 0x4f, 0xc2, 0x40,
+	0x10, 0xc5, 0x6d, 0xc1, 0x1a, 0xa6, 0xc0, 0x61, 0x2e, 0x96, 0x1a, 0x95, 0xf4, 0xc4, 0xc5, 0x12,
+	0xf0, 0x6c, 0x34, 0xfc, 0x39, 0x98, 0x98, 0x90, 0x14, 0xbd, 0x78, 0x5b, 0xe8, 0xa4, 0x69, 0x22,
+	0xb4, 0xee, 0x2c, 0x4d, 0xfc, 0x9c, 0x7e, 0x21, 0x43, 0xff, 0xc8, 0x96, 0xc0, 0x6d, 0x3b, 0x6f,
+	0xfa, 0x7b, 0x6f, 0x67, 0x07, 0x7a, 0xe9, 0x6a, 0x98, 0xc8, 0x88, 0xb3, 0xf5, 0x30, 0x1b, 0x95,
+	0x27, 0x3f, 0x95, 0x89, 0x4a, 0xb0, 0x9d, 0xae, 0xfc, 0xb2, 0x90, 0x8d, 0xbc, 0x27, 0x68, 0xbf,
+	0xc5, 0xac, 0x02, 0xe2, 0x34, 0xd9, 0x32, 0xe1, 0x03, 0x34, 0x43, 0xa1, 0x84, 0x63, 0xf4, 0x1b,
+	0x03, 0x7b, 0xdc, 0xf3, 0xf5, 0x66, 0x7f, 0x21, 0xa3, 0xaa, 0x31, 0xc8, 0xdb, 0xbc, 0x5b, 0xb0,
+	0x8b, 0xdf, 0xbf, 0x77, 0xc4, 0x0a, 0xbb, 0x60, 0xc6, 0xa1, 0x63, 0xf4, 0x8d, 0x41, 0x2b, 0x30,
+	0xe3, 0xd0, 0x7b, 0x81, 0xce, 0x8c, 0xbe, 0x48, 0x51, 0x40, 0x9c, 0xe3, 0x87, 0x60, 0x91, 0x94,
+	0x89, 0xe4, 0xd2, 0xe0, 0xba, 0x6e, 0x30, 0xdf, 0x6b, 0xef, 0x3f, 0x29, 0x05, 0x65, 0x9b, 0x77,
+	0x7f, 0x20, 0x9c, 0xb6, 0x58, 0x82, 0xad, 0xc5, 0x3a, 0x96, 0x11, 0xa1, 0xb9, 0x15, 0x1b, 0x72,
+	0xcc, 0xbc, 0x92, 0x9f, 0xb1, 0x0f, 0xb6, 0x08, 0x37, 0xf1, 0xf6, 0x83, 0x49, 0xbe, 0x86, 0x4e,
+	0x23, 0x97, 0xf4, 0x92, 0x37, 0x87, 0xce, 0x54, 0x92, 0x38, 0xb8, 0x56, 0x18, 0xe3, 0x3c, 0xc6,
+	0x3c, 0x85, 0x69, 0xfd, 0xdf, 0x08, 0xef, 0x00, 0x58, 0x09, 0xb5, 0xe3, 0x69, 0x12, 0x16, 0xa0,
+	0xcb, 0x40, 0xab, 0xa0, 0x03, 0x57, 0x1b, 0x62, 0x16, 0x51, 0x15, 0xb6, 0xfa, 0x1c, 0xff, 0x1a,
+	0x60, 0x2d, 0x64, 0xb4, 0xcc, 0xd6, 0x38, 0x01, 0xab, 0x08, 0x86, 0x37, 0xf5, 0xc9, 0xd5, 0xe2,
+	0xba, 0xe7, 0xdf, 0xcd, 0xbb, 0xc0, 0x19, 0x58, 0xc5, 0x48, 0x8f, 0x19, 0xb5, 0x41, 0xbb, 0x67,
+	0x44, 0x2e, 0x29, 0xcf, 0xd0, 0xdc, 0xbf, 0x3c, 0x1e, 0x59, 0x69, 0xdb, 0xe0, 0xba, 0xa7, 0xa4,
+	0x2a, 0xc6, 0xa4, 0xfb, 0xd9, 0xd6, 0x97, 0x74, 0x65, 0xe5, 0xeb, 0xf9, 0xf8, 0x17, 0x00, 0x00,
+	0xff, 0xff, 0x0d, 0x4e, 0x64, 0xc1, 0xbb, 0x02, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -355,7 +397,7 @@ type OrgSvcClient interface {
 	// delete org
 	Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*DeleteResonse, error)
 	// get user org
-	GetUserOrg(ctx context.Context, in *GetUserOrgRequest, opts ...grpc.CallOption) (*OrgResponse, error)
+	List(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (*ListResponse, error)
 }
 
 type orgSvcClient struct {
@@ -384,9 +426,9 @@ func (c *orgSvcClient) Delete(ctx context.Context, in *DeleteRequest, opts ...gr
 	return out, nil
 }
 
-func (c *orgSvcClient) GetUserOrg(ctx context.Context, in *GetUserOrgRequest, opts ...grpc.CallOption) (*OrgResponse, error) {
-	out := new(OrgResponse)
-	err := c.cc.Invoke(ctx, "/pb.orgsvc.v1.OrgSvc/GetUserOrg", in, out, opts...)
+func (c *orgSvcClient) List(ctx context.Context, in *ListRequest, opts ...grpc.CallOption) (*ListResponse, error) {
+	out := new(ListResponse)
+	err := c.cc.Invoke(ctx, "/pb.orgsvc.v1.OrgSvc/List", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -400,7 +442,7 @@ type OrgSvcServer interface {
 	// delete org
 	Delete(context.Context, *DeleteRequest) (*DeleteResonse, error)
 	// get user org
-	GetUserOrg(context.Context, *GetUserOrgRequest) (*OrgResponse, error)
+	List(context.Context, *ListRequest) (*ListResponse, error)
 }
 
 // UnimplementedOrgSvcServer can be embedded to have forward compatible implementations.
@@ -413,8 +455,8 @@ func (*UnimplementedOrgSvcServer) Create(ctx context.Context, req *CreateRequest
 func (*UnimplementedOrgSvcServer) Delete(ctx context.Context, req *DeleteRequest) (*DeleteResonse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
-func (*UnimplementedOrgSvcServer) GetUserOrg(ctx context.Context, req *GetUserOrgRequest) (*OrgResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetUserOrg not implemented")
+func (*UnimplementedOrgSvcServer) List(ctx context.Context, req *ListRequest) (*ListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
 }
 
 func RegisterOrgSvcServer(s *grpc.Server, srv OrgSvcServer) {
@@ -457,20 +499,20 @@ func _OrgSvc_Delete_Handler(srv interface{}, ctx context.Context, dec func(inter
 	return interceptor(ctx, in, info, handler)
 }
 
-func _OrgSvc_GetUserOrg_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetUserOrgRequest)
+func _OrgSvc_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OrgSvcServer).GetUserOrg(ctx, in)
+		return srv.(OrgSvcServer).List(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pb.orgsvc.v1.OrgSvc/GetUserOrg",
+		FullMethod: "/pb.orgsvc.v1.OrgSvc/List",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OrgSvcServer).GetUserOrg(ctx, req.(*GetUserOrgRequest))
+		return srv.(OrgSvcServer).List(ctx, req.(*ListRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -488,8 +530,8 @@ var _OrgSvc_serviceDesc = grpc.ServiceDesc{
 			Handler:    _OrgSvc_Delete_Handler,
 		},
 		{
-			MethodName: "GetUserOrg",
-			Handler:    _OrgSvc_GetUserOrg_Handler,
+			MethodName: "List",
+			Handler:    _OrgSvc_List_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

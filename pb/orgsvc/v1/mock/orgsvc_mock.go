@@ -20,8 +20,8 @@ type MockOrgSvcClient struct {
 	lockDelete sync.Mutex
 	DeleteFunc func(ctx context.Context, in *github_com_stkr89_livegig_common_pb_orgsvc_v1.DeleteRequest, opts ...google_golang_org_grpc.CallOption) (*github_com_stkr89_livegig_common_pb_orgsvc_v1.DeleteResonse, error)
 
-	lockGetUserOrg sync.Mutex
-	GetUserOrgFunc func(ctx context.Context, in *github_com_stkr89_livegig_common_pb_orgsvc_v1.GetUserOrgRequest, opts ...google_golang_org_grpc.CallOption) (*github_com_stkr89_livegig_common_pb_orgsvc_v1.OrgResponse, error)
+	lockList sync.Mutex
+	ListFunc func(ctx context.Context, in *github_com_stkr89_livegig_common_pb_orgsvc_v1.ListRequest, opts ...google_golang_org_grpc.CallOption) (*github_com_stkr89_livegig_common_pb_orgsvc_v1.ListResponse, error)
 
 	calls struct {
 		Create []struct {
@@ -34,9 +34,9 @@ type MockOrgSvcClient struct {
 			In   *github_com_stkr89_livegig_common_pb_orgsvc_v1.DeleteRequest
 			Opts []google_golang_org_grpc.CallOption
 		}
-		GetUserOrg []struct {
+		List []struct {
 			Ctx  context.Context
-			In   *github_com_stkr89_livegig_common_pb_orgsvc_v1.GetUserOrgRequest
+			In   *github_com_stkr89_livegig_common_pb_orgsvc_v1.ListRequest
 			Opts []google_golang_org_grpc.CallOption
 		}
 	}
@@ -130,18 +130,18 @@ func (m *MockOrgSvcClient) DeleteCalls() []struct {
 	return m.calls.Delete
 }
 
-// GetUserOrg mocks base method by wrapping the associated func.
-func (m *MockOrgSvcClient) GetUserOrg(ctx context.Context, in *github_com_stkr89_livegig_common_pb_orgsvc_v1.GetUserOrgRequest, opts ...google_golang_org_grpc.CallOption) (*github_com_stkr89_livegig_common_pb_orgsvc_v1.OrgResponse, error) {
-	m.lockGetUserOrg.Lock()
-	defer m.lockGetUserOrg.Unlock()
+// List mocks base method by wrapping the associated func.
+func (m *MockOrgSvcClient) List(ctx context.Context, in *github_com_stkr89_livegig_common_pb_orgsvc_v1.ListRequest, opts ...google_golang_org_grpc.CallOption) (*github_com_stkr89_livegig_common_pb_orgsvc_v1.ListResponse, error) {
+	m.lockList.Lock()
+	defer m.lockList.Unlock()
 
-	if m.GetUserOrgFunc == nil {
-		panic("mocker: MockOrgSvcClient.GetUserOrgFunc is nil but MockOrgSvcClient.GetUserOrg was called.")
+	if m.ListFunc == nil {
+		panic("mocker: MockOrgSvcClient.ListFunc is nil but MockOrgSvcClient.List was called.")
 	}
 
 	call := struct {
 		Ctx  context.Context
-		In   *github_com_stkr89_livegig_common_pb_orgsvc_v1.GetUserOrgRequest
+		In   *github_com_stkr89_livegig_common_pb_orgsvc_v1.ListRequest
 		Opts []google_golang_org_grpc.CallOption
 	}{
 		Ctx:  ctx,
@@ -149,29 +149,29 @@ func (m *MockOrgSvcClient) GetUserOrg(ctx context.Context, in *github_com_stkr89
 		Opts: opts,
 	}
 
-	m.calls.GetUserOrg = append(m.calls.GetUserOrg, call)
+	m.calls.List = append(m.calls.List, call)
 
-	return m.GetUserOrgFunc(ctx, in, opts...)
+	return m.ListFunc(ctx, in, opts...)
 }
 
-// GetUserOrgCalled returns true if GetUserOrg was called at least once.
-func (m *MockOrgSvcClient) GetUserOrgCalled() bool {
-	m.lockGetUserOrg.Lock()
-	defer m.lockGetUserOrg.Unlock()
+// ListCalled returns true if List was called at least once.
+func (m *MockOrgSvcClient) ListCalled() bool {
+	m.lockList.Lock()
+	defer m.lockList.Unlock()
 
-	return len(m.calls.GetUserOrg) > 0
+	return len(m.calls.List) > 0
 }
 
-// GetUserOrgCalls returns the calls made to GetUserOrg.
-func (m *MockOrgSvcClient) GetUserOrgCalls() []struct {
+// ListCalls returns the calls made to List.
+func (m *MockOrgSvcClient) ListCalls() []struct {
 	Ctx  context.Context
-	In   *github_com_stkr89_livegig_common_pb_orgsvc_v1.GetUserOrgRequest
+	In   *github_com_stkr89_livegig_common_pb_orgsvc_v1.ListRequest
 	Opts []google_golang_org_grpc.CallOption
 } {
-	m.lockGetUserOrg.Lock()
-	defer m.lockGetUserOrg.Unlock()
+	m.lockList.Lock()
+	defer m.lockList.Unlock()
 
-	return m.calls.GetUserOrg
+	return m.calls.List
 }
 
 // Reset resets the calls made to the mocked methods.
@@ -182,7 +182,7 @@ func (m *MockOrgSvcClient) Reset() {
 	m.lockDelete.Lock()
 	m.calls.Delete = nil
 	m.lockDelete.Unlock()
-	m.lockGetUserOrg.Lock()
-	m.calls.GetUserOrg = nil
-	m.lockGetUserOrg.Unlock()
+	m.lockList.Lock()
+	m.calls.List = nil
+	m.lockList.Unlock()
 }
