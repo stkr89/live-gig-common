@@ -21,8 +21,8 @@ message ListResponse {
 
 // list request
 message ListRequest {
-  // id of user
-  string id = 1;
+  // id of admin user
+  string adminUserId = 1;
 }
 
 // delete user response
