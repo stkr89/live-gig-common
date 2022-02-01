@@ -20,6 +20,9 @@ type MockTicketSvcClient struct {
 	lockList sync.Mutex
 	ListFunc func(ctx context.Context, in *github_com_stkr89_livegig_common_pb_ticketsvc_v1.ListRequest, opts ...google_golang_org_grpc.CallOption) (*github_com_stkr89_livegig_common_pb_ticketsvc_v1.ListResponse, error)
 
+	lockGet sync.Mutex
+	GetFunc func(ctx context.Context, in *github_com_stkr89_livegig_common_pb_ticketsvc_v1.GetRequest, opts ...google_golang_org_grpc.CallOption) (*github_com_stkr89_livegig_common_pb_ticketsvc_v1.TicketResponse, error)
+
 	calls struct {
 		Create []struct {
 			Ctx  context.Context
@@ -29,6 +32,11 @@ type MockTicketSvcClient struct {
 		List []struct {
 			Ctx  context.Context
 			In   *github_com_stkr89_livegig_common_pb_ticketsvc_v1.ListRequest
+			Opts []google_golang_org_grpc.CallOption
+		}
+		Get []struct {
+			Ctx  context.Context
+			In   *github_com_stkr89_livegig_common_pb_ticketsvc_v1.GetRequest
 			Opts []google_golang_org_grpc.CallOption
 		}
 	}
@@ -122,6 +130,50 @@ func (m *MockTicketSvcClient) ListCalls() []struct {
 	return m.calls.List
 }
 
+// Get mocks base method by wrapping the associated func.
+func (m *MockTicketSvcClient) Get(ctx context.Context, in *github_com_stkr89_livegig_common_pb_ticketsvc_v1.GetRequest, opts ...google_golang_org_grpc.CallOption) (*github_com_stkr89_livegig_common_pb_ticketsvc_v1.TicketResponse, error) {
+	m.lockGet.Lock()
+	defer m.lockGet.Unlock()
+
+	if m.GetFunc == nil {
+		panic("mocker: MockTicketSvcClient.GetFunc is nil but MockTicketSvcClient.Get was called.")
+	}
+
+	call := struct {
+		Ctx  context.Context
+		In   *github_com_stkr89_livegig_common_pb_ticketsvc_v1.GetRequest
+		Opts []google_golang_org_grpc.CallOption
+	}{
+		Ctx:  ctx,
+		In:   in,
+		Opts: opts,
+	}
+
+	m.calls.Get = append(m.calls.Get, call)
+
+	return m.GetFunc(ctx, in, opts...)
+}
+
+// GetCalled returns true if Get was called at least once.
+func (m *MockTicketSvcClient) GetCalled() bool {
+	m.lockGet.Lock()
+	defer m.lockGet.Unlock()
+
+	return len(m.calls.Get) > 0
+}
+
+// GetCalls returns the calls made to Get.
+func (m *MockTicketSvcClient) GetCalls() []struct {
+	Ctx  context.Context
+	In   *github_com_stkr89_livegig_common_pb_ticketsvc_v1.GetRequest
+	Opts []google_golang_org_grpc.CallOption
+} {
+	m.lockGet.Lock()
+	defer m.lockGet.Unlock()
+
+	return m.calls.Get
+}
+
 // Reset resets the calls made to the mocked methods.
 func (m *MockTicketSvcClient) Reset() {
 	m.lockCreate.Lock()
@@ -130,4 +182,7 @@ func (m *MockTicketSvcClient) Reset() {
 	m.lockList.Lock()
 	m.calls.List = nil
 	m.lockList.Unlock()
+	m.lockGet.Lock()
+	m.calls.Get = nil
+	m.lockGet.Unlock()
 }

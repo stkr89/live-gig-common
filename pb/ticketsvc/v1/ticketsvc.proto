@@ -10,6 +10,14 @@ service TicketSvc {
   rpc Create(CreateRequest) returns (TicketResponse) {}
   // list tickets
   rpc List(ListRequest) returns (ListResponse) {}
+  // get ticket
+  rpc Get(GetRequest) returns (TicketResponse) {}
+}
+
+// get request
+message GetRequest {
+  // unique id of ticket
+  string id = 1;
 }
 
 // list response
