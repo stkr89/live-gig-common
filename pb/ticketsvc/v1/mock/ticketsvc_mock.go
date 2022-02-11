@@ -21,7 +21,10 @@ type MockTicketSvcClient struct {
 	ListFunc func(ctx context.Context, in *github_com_stkr89_livegig_common_pb_ticketsvc_v1.ListRequest, opts ...google_golang_org_grpc.CallOption) (*github_com_stkr89_livegig_common_pb_ticketsvc_v1.ListResponse, error)
 
 	lockGet sync.Mutex
-	GetFunc func(ctx context.Context, in *github_com_stkr89_livegig_common_pb_ticketsvc_v1.GetRequest, opts ...google_golang_org_grpc.CallOption) (*github_com_stkr89_livegig_common_pb_ticketsvc_v1.TicketResponse, error)
+	GetFunc func(ctx context.Context, in *github_com_stkr89_livegig_common_pb_ticketsvc_v1.TicketRequest, opts ...google_golang_org_grpc.CallOption) (*github_com_stkr89_livegig_common_pb_ticketsvc_v1.TicketResponse, error)
+
+	lockDelete sync.Mutex
+	DeleteFunc func(ctx context.Context, in *github_com_stkr89_livegig_common_pb_ticketsvc_v1.TicketRequest, opts ...google_golang_org_grpc.CallOption) (*github_com_stkr89_livegig_common_pb_ticketsvc_v1.EmptyResponse, error)
 
 	calls struct {
 		Create []struct {
@@ -36,7 +39,12 @@ type MockTicketSvcClient struct {
 		}
 		Get []struct {
 			Ctx  context.Context
-			In   *github_com_stkr89_livegig_common_pb_ticketsvc_v1.GetRequest
+			In   *github_com_stkr89_livegig_common_pb_ticketsvc_v1.TicketRequest
+			Opts []google_golang_org_grpc.CallOption
+		}
+		Delete []struct {
+			Ctx  context.Context
+			In   *github_com_stkr89_livegig_common_pb_ticketsvc_v1.TicketRequest
 			Opts []google_golang_org_grpc.CallOption
 		}
 	}
@@ -131,7 +139,7 @@ func (m *MockTicketSvcClient) ListCalls() []struct {
 }
 
 // Get mocks base method by wrapping the associated func.
-func (m *MockTicketSvcClient) Get(ctx context.Context, in *github_com_stkr89_livegig_common_pb_ticketsvc_v1.GetRequest, opts ...google_golang_org_grpc.CallOption) (*github_com_stkr89_livegig_common_pb_ticketsvc_v1.TicketResponse, error) {
+func (m *MockTicketSvcClient) Get(ctx context.Context, in *github_com_stkr89_livegig_common_pb_ticketsvc_v1.TicketRequest, opts ...google_golang_org_grpc.CallOption) (*github_com_stkr89_livegig_common_pb_ticketsvc_v1.TicketResponse, error) {
 	m.lockGet.Lock()
 	defer m.lockGet.Unlock()
 
@@ -141,7 +149,7 @@ func (m *MockTicketSvcClient) Get(ctx context.Context, in *github_com_stkr89_liv
 
 	call := struct {
 		Ctx  context.Context
-		In   *github_com_stkr89_livegig_common_pb_ticketsvc_v1.GetRequest
+		In   *github_com_stkr89_livegig_common_pb_ticketsvc_v1.TicketRequest
 		Opts []google_golang_org_grpc.CallOption
 	}{
 		Ctx:  ctx,
@@ -165,13 +173,57 @@ func (m *MockTicketSvcClient) GetCalled() bool {
 // GetCalls returns the calls made to Get.
 func (m *MockTicketSvcClient) GetCalls() []struct {
 	Ctx  context.Context
-	In   *github_com_stkr89_livegig_common_pb_ticketsvc_v1.GetRequest
+	In   *github_com_stkr89_livegig_common_pb_ticketsvc_v1.TicketRequest
 	Opts []google_golang_org_grpc.CallOption
 } {
 	m.lockGet.Lock()
 	defer m.lockGet.Unlock()
 
 	return m.calls.Get
+}
+
+// Delete mocks base method by wrapping the associated func.
+func (m *MockTicketSvcClient) Delete(ctx context.Context, in *github_com_stkr89_livegig_common_pb_ticketsvc_v1.TicketRequest, opts ...google_golang_org_grpc.CallOption) (*github_com_stkr89_livegig_common_pb_ticketsvc_v1.EmptyResponse, error) {
+	m.lockDelete.Lock()
+	defer m.lockDelete.Unlock()
+
+	if m.DeleteFunc == nil {
+		panic("mocker: MockTicketSvcClient.DeleteFunc is nil but MockTicketSvcClient.Delete was called.")
+	}
+
+	call := struct {
+		Ctx  context.Context
+		In   *github_com_stkr89_livegig_common_pb_ticketsvc_v1.TicketRequest
+		Opts []google_golang_org_grpc.CallOption
+	}{
+		Ctx:  ctx,
+		In:   in,
+		Opts: opts,
+	}
+
+	m.calls.Delete = append(m.calls.Delete, call)
+
+	return m.DeleteFunc(ctx, in, opts...)
+}
+
+// DeleteCalled returns true if Delete was called at least once.
+func (m *MockTicketSvcClient) DeleteCalled() bool {
+	m.lockDelete.Lock()
+	defer m.lockDelete.Unlock()
+
+	return len(m.calls.Delete) > 0
+}
+
+// DeleteCalls returns the calls made to Delete.
+func (m *MockTicketSvcClient) DeleteCalls() []struct {
+	Ctx  context.Context
+	In   *github_com_stkr89_livegig_common_pb_ticketsvc_v1.TicketRequest
+	Opts []google_golang_org_grpc.CallOption
+} {
+	m.lockDelete.Lock()
+	defer m.lockDelete.Unlock()
+
+	return m.calls.Delete
 }
 
 // Reset resets the calls made to the mocked methods.
@@ -185,4 +237,7 @@ func (m *MockTicketSvcClient) Reset() {
 	m.lockGet.Lock()
 	m.calls.Get = nil
 	m.lockGet.Unlock()
+	m.lockDelete.Lock()
+	m.calls.Delete = nil
+	m.lockDelete.Unlock()
 }

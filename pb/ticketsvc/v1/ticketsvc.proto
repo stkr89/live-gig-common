@@ -11,11 +11,16 @@ service TicketSvc {
   // list tickets
   rpc List(ListRequest) returns (ListResponse) {}
   // get ticket
-  rpc Get(GetRequest) returns (TicketResponse) {}
+  rpc Get(TicketRequest) returns (TicketResponse) {}
+  // delete ticket
+  rpc Delete(TicketRequest) returns (EmptyResponse) {}
 }
 
-// get request
-message GetRequest {
+// empty response
+message EmptyResponse {}
+
+// ticket request
+message TicketRequest {
   // unique id of ticket
   string id = 1;
 }
